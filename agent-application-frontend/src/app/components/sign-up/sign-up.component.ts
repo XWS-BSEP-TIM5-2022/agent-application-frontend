@@ -17,6 +17,16 @@ export class SignUpComponent implements OnInit {
       "username": "",
       "password" : "",
   };
+  username: string = ""
+  password: string = ""
+  email: string = ""
+  isPassless = false;
+  isLogin = true;
+  isSignup = false;
+  message = "";
+  messageLogin = "";
+  messageSignUp = "";
+  isSubmitted = false; 
 
   constructor(private router: Router, private authService: AuthService) { }
 
@@ -34,5 +44,15 @@ export class SignUpComponent implements OnInit {
       err => { 
         console.log(err.error)
       })
+  }
+
+
+  login(){ }
+
+  onEmailChange(){
+    // this.message = ""
+  }
+
+  passwordlessLogin(){
   }
 }
