@@ -9,9 +9,7 @@
 <meta name="keywords" content="" />
 </head>
 
-
 <body class="sign-in" style="overflow: hidden;">
-
 	<div class="wrapper">
 		<div class="sign-in-page">
 			<div class="signin-popup">
@@ -21,7 +19,7 @@
 							<div class="cmp-info">
 								<div class="cm-logo">
 									<!-- <img src="images/cm-logo.png" alt=""> -->
-									<p>Workwise,  is a global freelancing platform and social networking where businesses and independent professionals connect and collaborate remotely</p>
+									<p>Agent application,  is a global freelancing platform and social networking where businesses and independent professionals connect and collaborate remotely</p>
 								</div><!--cm-logo end-->	
 								<!-- <img src="images/cm-main-img.png" alt="">			 -->
 							</div><!--cmp-info end-->
@@ -48,35 +46,35 @@
 											<div class="row">
 												<div class="col-lg-12 no-pdd">
 													<div class="sn-field">
-														<input type="text" name="firstName" placeholder="First name*">
+														<input type="text" name="firstName" placeholder="First name*" [(ngModel)]="user.firstName">
 														<i class="la la-user"></i>
 													</div>
 												</div>
                                                 <div class="col-lg-12 no-pdd">
 													<div class="sn-field">
-														<input type="text" name="lastName" placeholder="Last name*">
+														<input type="text" name="lastName" placeholder="Last name*" [(ngModel)]="user.lastName">
 														<i class="la la-user"></i>
 													</div>
 												</div>
 												<div class="col-lg-12 no-pdd">
 													<div class="sn-field">
-														<input type="text"  name="email" placeholder="Email*">
+														<input type="text"  name="email" placeholder="Email*" [(ngModel)]="user.email">
 														<i class="la la-globe"></i>
 													</div>
 												</div>
                                                 <div class="col-lg-12 no-pdd">
 													<div class="sn-field">
-														<input type="text" name="userName" placeholder="Username*">
+														<input type="text" name="userName" placeholder="Username*" [(ngModel)]="user.username">
 														<i class="la la-user"></i>
 													</div>
 												</div>
-                                                <div class="col-lg-12 no-pdd">
+                                                <!-- <div class="col-lg-12 no-pdd">
 													<div class="sn-field">
 														<input type="text" name="mobilePhone"  placeholder="Mobile phone">
 														<i class="la la-mobile-phone"></i>
 													</div>
-												</div>
-												<div class="col-lg-12 no-pdd">
+												</div> -->
+												<!-- <div class="col-lg-12 no-pdd">
 													<div class="sn-field">
 														<select >
 															<option>Gender*</option>
@@ -85,24 +83,24 @@
 														</select>                                            
 														<i class="la la-users"></i>
 													</div>
-												</div>
-                                                <div class="col-lg-12 no-pdd">
+												</div> -->
+                                                <!-- <div class="col-lg-12 no-pdd">
 													<div class="sn-field">
 														<input type="text" name="biography" placeholder="Biography" autocomplete="off">
 														<i class="la la-pencil-square-o"></i>
 													</div>
-												</div>
+												</div> -->
 
-                                                <div class="col-lg-12 no-pdd">
+                                                <!-- <div class="col-lg-12 no-pdd">
 													<div class="sn-field">
                                                         <input placeholder="Birth*"  name="birthday" class="textbox-n" type="text" onfocus="(this.type='date')" id="date">
 														<i class="la la-birthday-cake"></i>
 													</div>
-												</div>
+												</div> -->
 
 												<div class="col-lg-12 no-pdd">
 													<div class="sn-field">
-														<input type="password" name="password" placeholder="Password*" autocomplete="off">
+														<input type="password" name="password" placeholder="Password*" autocomplete="off" [(ngModel)]="user.password">
 														<i class="la la-lock"></i>
 													</div>
 												</div>
@@ -161,8 +159,6 @@
                                                         <input type="text" name="password" placeholder="Place" autocomplete="off">
                                                         <input placeholder="Start date" class="textbox-n" type="text" onfocus="(this.type='date')" id="date">
                                                         <input placeholder="End date" class="textbox-n" type="text" onfocus="(this.type='date')" id="date">
-
-
 													</div>
 												</div> -->
                                                 <!-- Education -->
@@ -181,7 +177,7 @@
 													</div>
 												</div>
 												<div class="col-lg-12 no-pdd">
-													<button type="submit" value="submit">Sign up</button>
+													<button type="submit" value="submit" (click)="signUp()">Sign up</button>
 												</div>
 											</div>
 										</form>
