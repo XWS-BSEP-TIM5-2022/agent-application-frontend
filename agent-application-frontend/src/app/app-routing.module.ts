@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { JobOffersComponent } from './components/job-offers/job-offers.component';
 import { AccountRecoveryComponent } from './components/account-recovery/account-recovery.component';
 import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
 import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: '',
     component: SignUpComponent,
+  },
+  {
+    path: 'job-offers',
+    component: JobOffersComponent,
   },
   {
     path: 'feed',
@@ -37,7 +42,6 @@ const routes: Routes = [
       expectedRole: 'ROLE_USER' //['User', 'Admin']
     }
   }, 
-
 ];
 
 @NgModule({

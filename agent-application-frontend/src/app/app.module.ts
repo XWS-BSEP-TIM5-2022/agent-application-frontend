@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { TestComponent } from './components/test/test.component';
 import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { JobOffersComponent } from './components/job-offers/job-offers.component';
+import { CompanyRegistrationComponent } from './components/company-registration/company-registration.component';
 import { FormsModule } from '@angular/forms';
 import { UserFeedComponent } from './components/user-feed/user-feed.component';
 import { AuthGuardService } from './services/auth-guard.service';
@@ -21,10 +23,12 @@ import { AccountSettingsComponent } from './components/account-settings/account-
     AppComponent,
     TestComponent,
     SignUpComponent,
+    JobOffersComponent,
+    CompanyRegistrationComponent,
     UserFeedComponent,
     ActivateAccountComponent,
     AccountRecoveryComponent,
-    AccountSettingsComponent
+    AccountSettingsComponent,
   ],
   imports: [
     BrowserModule,
