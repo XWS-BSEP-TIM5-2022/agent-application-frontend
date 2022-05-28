@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  backend_api: 'https://localhost:8080/' // TODO: change
+  backend_api: 'http://localhost:8090/'
 };
 
 /*
