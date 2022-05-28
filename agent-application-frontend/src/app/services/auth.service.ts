@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map } from 'rxjs';
+import { catchError, map, Observable } from 'rxjs';
 import { environment } from "../../environments/environment";
 import Swal from 'sweetalert2';
 import { User } from '../model/user';
@@ -14,6 +14,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AuthService {
   private readonly signUpPath = environment.backend_api + 'auth/register';
   private readonly loginPath = environment.backend_api + 'auth/login';
+  private readonly activateAccountPath = environment.backend_api + 'auth/activateAccount?token=';
+
 
   logged: Boolean = false;
   private access_token = null;
@@ -27,9 +29,7 @@ export class AuthService {
       'Content-Type': 'application/json'
    });
     return this.http.post(this.signUpPath, JSON.stringify(user), {'headers': headers})
-    .pipe(map((res: any) => {
-
-    }))
+    .pipe(map((res: any) => { }))
     .pipe(catchError(error => this.checkError(error)));
     
   }
@@ -42,6 +42,23 @@ export class AuthService {
     })
     throw error;
   } 
+
+  private checkActivationAccountError(error: any): any {
+    if(error.message.text == "Account is activated") {
+      Swal.fire({
+        // icon: 'error',
+        title: 'You can login',
+        text: error.message.text,
+      })
+      return;
+    } 
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: error.message,
+    })
+    throw error;
+  }
 
   login(body: {email: string, password: string}) {
     const headers = new HttpHeaders({
@@ -61,7 +78,7 @@ export class AuthService {
       let decoded: any = jwt_decode(this.access_token)
       localStorage.setItem("user", decoded.sub)
       localStorage.setItem("role", decoded.role)
-      localStorage.setItem("jwt", res.token);
+      localStorage.setItem("jwt", this.access_token);
     }));
   }
 
@@ -92,14 +109,15 @@ export class AuthService {
     return this.access_token;
   }
 
-  // activateAccount(jwt): Observable<any> {
-  //   console.log(jwt)
-  //   return this.http.get<any>(`${this.activateAccountPath}/`+ jwt)
-  //   .pipe(map((res: any) => {
-
-  //   }))
-  //   .pipe(catchError(error => this.checkError(error)));
-  // }
+  activateAccount(jwt: string): Observable<any> {
+    console.log(jwt)
+    const headers = new HttpHeaders({
+      responseType: 'text'
+    })
+    return this.http.get<any>(`${this.activateAccountPath}`+ jwt, {'headers': headers})
+    .pipe(map((res: any) => { }))
+    .pipe(catchError(error => this.checkActivationAccountError(error)));
+  }
 
   isAuthenticated(): boolean {
     if (this.tokenIsPresent() && this.roleIsPresent() && !this.tokenIsExpired()){

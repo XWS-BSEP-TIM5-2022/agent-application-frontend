@@ -12,13 +12,19 @@ import { UserFeedComponent } from './components/user-feed/user-feed.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { RoleGuardService } from './services/role-guard.service';
+import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
+import { AccountRecoveryComponent } from './components/account-recovery/account-recovery.component';
+import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TestComponent,
     SignUpComponent,
-    UserFeedComponent
+    UserFeedComponent,
+    ActivateAccountComponent,
+    AccountRecoveryComponent,
+    AccountSettingsComponent
   ],
   imports: [
     BrowserModule,

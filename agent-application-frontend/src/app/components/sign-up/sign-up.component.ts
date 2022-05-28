@@ -39,7 +39,15 @@ export class SignUpComponent implements OnInit {
     // }
     this.authService.signUp(this.user)
       .subscribe(ok => {
-        this.router.navigate(['feed'])
+        alert('Check your email inbox')
+        // this.router.navigate(['feed'])
+        this.user = {
+          "firstName": "",
+          "lastName": "",
+          "email": "",
+          "username": "",
+          "password" : "",
+      };
       },
       err => { 
         console.log(err.error)
@@ -56,11 +64,13 @@ export class SignUpComponent implements OnInit {
       .subscribe(ok => {
         console.log(ok)
         this.router.navigate(['feed'])
+      }, err => {
+        alert(err.message)
       })
   }
 
   onEmailChange(){
-    // this.message = ""
+    this.message = ""
   }
 
   passwordlessLogin(){
