@@ -1,24 +1,47 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { TokenInterceptor } from './interceptor/token-interceptor';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TestComponent } from './components/test/test.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { FormsModule } from '@angular/forms';
+import { UserFeedComponent } from './components/user-feed/user-feed.component';
+import { AuthGuardService } from './services/auth-guard.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { RoleGuardService } from './services/role-guard.service';
+import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
+import { AccountRecoveryComponent } from './components/account-recovery/account-recovery.component';
+import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TestComponent,
-    SignUpComponent
+    SignUpComponent,
+    UserFeedComponent,
+    ActivateAccountComponent,
+    AccountRecoveryComponent,
+    AccountSettingsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+      }, 
+      AuthGuardService,
+      JwtHelperService,
+      RoleGuardService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>WorkWise Html Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+  </head>
+  <body class="sign-in">
+    <div class="wrapper">
+      <div class="sign-in-page">
+        <div class="signin-popup" style="align-items: center">
+          <div class="signin-pop2" style="height: 250px; width: 800px; background: white;">
+            <!-- <img src="../../../images/cm-logo.png" alt=""> -->
+			<div class="child" style="display: flex; margin: auto; justify-content: center;">
+				<p *ngIf="!expired" style="font-size: 25px; text-align: center; margin-top: 40px;">
+					You have successfully activated your profile
+				  </p>
+			</div>
+            <p *ngIf="expired" style="font-size: 25px; text-align: center">
+              Token is expired.
+            </p>
+
+            <div class="child" style="display: flex; margin: auto; justify-content: center; margin-top: 50px;">
+              <button
+                *ngIf="!expired"
+                type="submit"
+                value="submit"
+                class="btn btn-danger"
+                (click)="login()"
+              >
+                Login
+              </button>
+            </div>
+          </div>
+          <!--signin-pop end-->
+        </div>
+        <!--signin-popup end-->
+      </div>
+      <!--sign-in-page end-->
+    </div>
+    <!--theme-layout end-->
+  </body>
+</html>
