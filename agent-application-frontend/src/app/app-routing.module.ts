@@ -37,6 +37,10 @@ const routes: Routes = [
       expectedRole: 'ROLE_USER' //['User', 'Admin']
     }
   }, 
+  {
+    path: 'test',
+    component: TestComponent,
+  },
 
 ];
 

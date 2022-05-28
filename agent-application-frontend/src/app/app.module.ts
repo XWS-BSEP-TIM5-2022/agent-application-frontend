@@ -5,7 +5,7 @@ import { TokenInterceptor } from './interceptor/token-interceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TestComponent } from './components/test/test.component';
-import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { FormsModule } from '@angular/forms';
 import { UserFeedComponent } from './components/user-feed/user-feed.component';
@@ -15,6 +15,10 @@ import { RoleGuardService } from './services/role-guard.service';
 import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
 import { AccountRecoveryComponent } from './components/account-recovery/account-recovery.component';
 import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -31,6 +35,10 @@ import { AccountSettingsComponent } from './components/account-settings/account-
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    MatIconModule,
+    MatCardModule,
+    MatDividerModule,
+    MatRadioModule,
   ],
   providers: [
     {
