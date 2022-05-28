@@ -38,7 +38,7 @@ export class AuthService {
     Swal.fire({
       icon: 'error',
       title: 'Oops...',
-      text: error.error.message,
+      text: error.message,
     })
     throw error;
   } 
@@ -55,7 +55,8 @@ export class AuthService {
       this.logged = true;
       this.access_token = res['accessToken'];
       if(!this.access_token) {
-        return console.error("Access token is null");
+        this.checkError(new Error('Access token is null'))
+        return;
       }
       let decoded: any = jwt_decode(this.access_token)
       localStorage.setItem("user", decoded.sub)
@@ -76,7 +77,6 @@ export class AuthService {
   tokenIsExpired(){
     if (localStorage.getItem("jwt") != undefined && localStorage.getItem("jwt") != null)  {
       let locStorageToken = localStorage.getItem("jwt")
-      // let token = JSON.parse(localStorage.getItem('jwt') || '{}');
       if (!locStorageToken){
         return true;
       }
