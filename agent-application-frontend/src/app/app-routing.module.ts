@@ -17,9 +17,13 @@ const routes: Routes = [
   {
     path: 'job-offers',
     component: JobOffersComponent,
+    canActivate: [RoleGuardService], 
+    data: { 
+      expectedRole: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_COMPANY_OWNER'] 
+    }
   },
   {
-    path: 'feed',
+    path: 'feed', // TODO: delete
     component: UserFeedComponent,
     canActivate: [RoleGuardService], 
     data: { 

@@ -26,55 +26,25 @@
                             </ul>
                         </nav>    
 					</div><!--logo end-->
-					<div class="menu-btn">
-						<a href="#" title=""><i class="fa fa-bars"></i></a>
-					</div><!--menu-btn end-->
                     
                     <div class="user-account">
-						<div class="user-info">
+						<div class="user-info" (click)="makeVisibleUserAcccountSettings()" style="cursor: pointer;">
 							<img src="http://via.placeholder.com/30x30" alt="">
-							<a href="#" title="">John</a>
+							<a href="." title=""> {{ user.username }}</a>
 							<i class="la la-sort-down"></i>
 						</div>
-						<div class="user-account-settingss">
-							<h3>Online Status</h3>
-							<ul class="on-off-status">
-								<li>
-									<div class="fgt-sec">
-										<input type="radio" name="cc" id="c5">
-										<label for="c5">
-											<span></span>
-										</label>
-										<small>Online</small>
-									</div>
-								</li>
-								<li>
-									<div class="fgt-sec">
-										<input type="radio" name="cc" id="c6">
-										<label for="c6">
-											<span></span>
-										</label>
-										<small>Offline</small>
-									</div>
-								</li>
-							</ul>
-							<h3>Custom Status</h3>
-							<div class="search_form">
-								<form>
-									<input type="text" name="search">
-									<button type="submit">Ok</button>
-								</form>
-							</div><!--search_form end-->
-							<h3>Setting</h3>
+						<div class="user-account-settingss active" *ngIf="visibleUserAcccountSettings">
+							<h3>Settings</h3>
 							<ul class="us-links">
-								<li><a href="profile-account-setting.html" title="">Account Setting</a></li>
+								<li><a href="/account-setting" title="">Account Setting</a></li>
 								<li><a href="#" title="">Privacy</a></li>
 								<li><a href="#" title="">Faqs</a></li>
 								<li><a href="#" title="">Terms & Conditions</a></li>
 							</ul>
-							<h3 class="tc"><a href="sign-in.html" title="">Logout</a></h3>
+							<h3 class="tc"><a routerLink="." (click)="logout()">Logout</a></h3>
 						</div><!--user-account-settingss end-->
 					</div>
+					
 				</div><!--header-data end-->
 			</div>
 		</header><!--header end-->
@@ -96,113 +66,35 @@
 					<div class="main-section-data">
 						<div class="row">
                            
-                            <!-- LEFT SIDEBAR -->
-                            <div class="col-lg-3">	
-                                <div class="filter-secs">
-									<div class="filter-heading">
-										<h3>Filters</h3>
-										<a href="#" title="">Clear all filters</a>
-									</div><!--filter-heading end-->
-									<div class="paddy">
-										<div class="filter-dd">
-											<div class="filter-ttl">
-												<h3>Skills</h3>
-												<a href="#" title="">Clear</a>
-											</div>
-											<form>
-												<input type="text" name="search-skills" placeholder="Search skills">
-											</form>
-										</div>
-										<div class="filter-dd">
-											<div class="filter-ttl">
-												<h3>Availabilty</h3>
-												<a href="#" title="">Clear</a>
-											</div>
-											<ul class="avail-checks">
-												<li>
-													<input type="radio" name="cc" id="c1">
-													<label for="c1">
-														<span></span>
-													</label>
-													<small>Hourly</small>
-												</li>
-												<li>
-													<input type="radio" name="cc" id="c2">
-													<label for="c2">
-														<span></span>
-													</label>
-													<small>Part Time</small>
-												</li>
-												<li>
-													<input type="radio" name="cc" id="c3">
-													<label for="c3">
-														<span></span>
-													</label>
-													<small>Full Time</small>
-												</li>
-											</ul>
-										</div>
-										<div class="filter-dd">
-											<div class="filter-ttl">
-												<h3>Job Type</h3>
-												<a href="#" title="">Clear</a>
-											</div>
-											<form class="job-tp">
-												<select>
-													<option>Select a job type</option>
-													<option>Select a job type</option>
-													<option>Select a job type</option>
-													<option>Select a job type</option>
-												</select>
-												<i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-											</form>
-										</div>
-										<div class="filter-dd">
-											<div class="filter-ttl">
-												<h3>Pay Rate / Hr ($)</h3>
-												<a href="#" title="">Clear</a>
-											</div>
-											<div class="rg-slider">
-			                                    <input class="rn-slider slider-input" type="hidden" value="5,50" />
-			                                </div>
-			                                <div class="rg-limit">
-			                                	<h4>1</h4>
-			                                	<h4>100+</h4>
-			                                </div><!--rg-limit end-->
-										</div>
-										<div class="filter-dd">
-											<div class="filter-ttl">
-												<h3>Experience Level</h3>
-												<a href="#" title="">Clear</a>
-											</div>
-											<form class="job-tp">
-												<select>
-													<option>Select a experience level</option>
-													<option>3 years</option>
-													<option>4 years</option>
-													<option>5 years</option>
-												</select>
-												<i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-											</form>
-										</div>
-										<div class="filter-dd">
-											<div class="filter-ttl">
-												<h3>Countries</h3>
-												<a href="#" title="">Clear</a>
-											</div>
-											<form class="job-tp">
-												<select>
-													<option>Select a country</option>
-													<option>United Kingdom</option>
-													<option>United States</option>
-													<option>Russia</option>
-												</select>
-												<i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-											</form>
-										</div>
+							<!-- RIGHT SIDEBAR -->
+							<div class="col-lg-3">
+								<div class="right-sidebar">
+									<div class="widget widget-about">
+										<img src="images/wd-logo.png" alt="">
+										<ul class="social_links">
+											<li><a title=""><i class="la la-smile-o"></i> {{ user.username }} </a></li>
+											<li><a title=""><i class="la la-user"></i> {{ user.firstName }} {{ user.lastName }} </a></li>
+											<li><a title=""><i class="la la-at"></i> {{ user.email }} </a></li>
+										</ul>
 									</div>
-								</div><!--filter-secs end-->
+								</div>
 							</div>
+
+                            <!-- LEFT SIDEBAR -->
+                            <!-- <div class="col-lg-3">	
+								<div class="main-left-sidebar">
+									<div class="user_profile">
+										<div class="user-pro-img">
+											<img src="http://via.placeholder.com/170x170" alt="">
+											<a href="#" title=""><i class="fa fa-camera"></i></a>
+										</div>
+										<ul class="social_links">
+											<li><a title=""><i class="la la-user"></i> {{ user.firstName }} {{ user.lastName }} </a></li>
+											<li><a title=""><i class="la la-at"></i> {{ user.email }} </a></li>
+										</ul>
+									</div>
+								</div>
+                    		</div> -->
 							
                             <!-- JOB OFFERS -->
                             <div class="col-lg-6">
@@ -250,7 +142,7 @@
 										<img src="images/wd-logo.png" alt="">
 										<h3>Want to promote your company?</h3>
 										<span>Request company registration</span>
-										<div class="sign_link" style="background-color: #e44d3a;">
+										<div class="sign_link" style="background-color: #265191;">
 											<h3><a routerLink="." style="color: white;" (click)="requestCompanyRegistration()">Request</a></h3>
 										</div>
 									</div><!--widget-about end-->

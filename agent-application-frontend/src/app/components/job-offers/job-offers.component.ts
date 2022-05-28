@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Company } from 'src/app/model/company';
 import { JobOffer } from 'src/app/model/job-offer';
+import { User } from 'src/app/model/user';
+import { AuthService } from 'src/app/services/auth.service';
 import { CompanyService } from 'src/app/services/company.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-job-offers',
@@ -10,14 +14,28 @@ import { CompanyService } from 'src/app/services/company.service';
 })
 export class JobOffersComponent implements OnInit {
 
-  constructor(private companyService: CompanyService) { }
+  constructor(private companyService: CompanyService, private userService: UserService, private router: Router, private authService: AuthService) { }
   
   jobOffers: JobOffer[] = [];
   searchedJobOffers: JobOffer[] = [];
   searchCriteria: string = "";
+  user: User;
+  visibleUserAcccountSettings: boolean = false;
 
   ngOnInit(): void {
+    this.loadUserData();
     this.loadJobOffers();
+  }
+
+  loadUserData(){
+    let username =  localStorage.getItem("user");
+    
+    if (username != undefined){
+      this.userService.getByUsername(username).subscribe(
+        (user: User) => {
+        this.user = user;
+      })
+    }
   }
 
   loadJobOffers(){
@@ -48,7 +66,14 @@ export class JobOffersComponent implements OnInit {
       (j.preconditions).toLowerCase().includes(this.searchCriteria.toLowerCase()) || 
       (j.position.name).toLowerCase().includes(this.searchCriteria.toLowerCase())
     )
+  }
 
-    console.log(this.jobOffers)
+  makeVisibleUserAcccountSettings(){
+    this.visibleUserAcccountSettings = !this.visibleUserAcccountSettings
+  }
+
+  logout(){
+    this.authService.logout();
+    this.router.navigate(['']);  
   }
 }
