@@ -6,5 +6,5 @@ export class Company {
     description: string;
     phoneNumber: string;
     isActive: boolean;
-    owner: User;
+    // owner: User;
 }

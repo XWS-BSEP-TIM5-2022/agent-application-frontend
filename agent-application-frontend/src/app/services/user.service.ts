@@ -13,6 +13,10 @@ export class UserService {
   private readonly userPath = environment.backend_api + 'users';
 
   getByUsername(username: string){
-    return this.http.get<User>(`${this.userPath}/`+ username)    
+    return this.http.get<any>(`${this.userPath}/`+ username)    
+  }
+
+  getCompanyByOwnerUsername(username: string){
+    return this.http.get<any>(`${this.userPath}/`+ username + `/company`)    
   }
 }

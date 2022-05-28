@@ -1,1 +1,37 @@
-<p>company-registration works!</p>
+<h2 mat-dialog-title>Company registration</h2>
+<mat-divider></mat-divider>
+<form #registrationForm = "ngForm" style="margin-top: 0.5vw; margin-left: 1vw; margin-right: 1vw; margin-bottom: 0.5vw;">
+    <div class="row" style="margin-bottom: -1vw;">
+        <div class="form-outline; col-md-12 mb-4 pb-2">
+            <input type="text" name="userInfo" class="form-control"  placeholder="Enter phone number" [(ngModel)]="userInfo" disabled/>
+             &nbsp;&nbsp; <label style="font-size: small;"> Company owner </label>    
+        </div>
+    </div>
+
+    <div class="row" style="margin-bottom: -1vw;">
+        <div class="form-outline; col-md-12 mb-4 pb-2">
+            <input type="text" name="companyName" class="form-control" [(ngModel)]="request.companyDTO.name" placeholder="Enter company name"/>
+             &nbsp;&nbsp; <label style="font-size: small;"> Company name </label>    
+        </div>
+    </div>
+
+    <div class="row"  style="margin-bottom: -1.5vw;">
+        <div class="col-md-12 mb-4 pb-2">
+            <mat-form-field class="example-full-width" appearance="outline" style="width: 30vw;">  
+                <textarea matInput style="height: 10vw;" name="desc" [(ngModel)]="request.companyDTO.description" placeholder="Company description"></textarea>
+            </mat-form-field>
+        </div>
+    </div>
+    
+    <div class="row" style="margin-bottom: -1vw;">
+        <div class="form-outline; col-md-12 mb-4 pb-2">
+            <input type="tel" name="phoneNumber" class="form-control" [(ngModel)]="request.companyDTO.phoneNumber" placeholder="Enter phone number"/>
+             &nbsp;&nbsp; <label style="font-size: small;"> Phone number </label>    
+        </div>
+    </div>
+
+    <div class="mt-4 pt-2">
+        <input class="btn btn-success btn-lg center-div" style="color:white" type="button" (click)="requestCompanyRegistration()" value="Submit" />
+        <input class="btn btn-lg center-div" (click)="onNoClick()" type="button" value="Cancel" />
+    </div>
+</form>

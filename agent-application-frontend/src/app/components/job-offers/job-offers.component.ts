@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Company } from 'src/app/model/company';
 import { JobOffer } from 'src/app/model/job-offer';
@@ -6,6 +7,7 @@ import { User } from 'src/app/model/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { CompanyService } from 'src/app/services/company.service';
 import { UserService } from 'src/app/services/user.service';
+import { CompanyRegistrationComponent } from '../company-registration/company-registration.component';
 
 @Component({
   selector: 'app-job-offers',
@@ -14,13 +16,16 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class JobOffersComponent implements OnInit {
 
-  constructor(private companyService: CompanyService, private userService: UserService, private router: Router, private authService: AuthService) { }
+  constructor(private companyService: CompanyService, private userService: UserService, private router: Router, private authService: AuthService,
+    public dialog: MatDialog) { }
   
   jobOffers: JobOffer[] = [];
   searchedJobOffers: JobOffer[] = [];
   searchCriteria: string = "";
   user: User;
   visibleUserAcccountSettings: boolean = false;
+  role: String;
+  company: Company = new Company;
 
   ngOnInit(): void {
     this.loadUserData();
@@ -29,11 +34,23 @@ export class JobOffersComponent implements OnInit {
 
   loadUserData(){
     let username =  localStorage.getItem("user");
-    
+    let role =  localStorage.getItem("role");    
+
+    if (role != undefined){
+      this.role = role
+    }
+
     if (username != undefined){
       this.userService.getByUsername(username).subscribe(
         (user: User) => {
         this.user = user;
+      })
+    }
+
+    if (role == "ROLE_COMPANY_OWNER" && username != undefined){
+      this.userService.getCompanyByOwnerUsername(username).subscribe(
+        (company: Company) => {
+        this.company = company;
       })
     }
   }
@@ -55,7 +72,18 @@ export class JobOffersComponent implements OnInit {
   }
 
   requestCompanyRegistration(){
-    
+    const dialogRef = this.dialog.open(CompanyRegistrationComponent, {
+      width: '37vw',
+      data: {},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      window.location.reload();
+    });
+  }
+
+  newJobOffer(){
+
   }
 
   search(){

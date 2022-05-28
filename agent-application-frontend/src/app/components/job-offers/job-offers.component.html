@@ -15,7 +15,6 @@
 			<div class="container">
 				<div class="header-data">
 					<div class="logo">
-						<a href="index.html" title=""><img src="assets/logo.png" alt=""></a>
                         <nav> 
                             <ul>
                                 <li>
@@ -23,10 +22,20 @@
                                         Home
                                     </a>
                                 </li>
-                            </ul>
+                            </ul>					
                         </nav>    
-					</div><!--logo end-->
-                    
+					</div>
+                   	<div class="logo" *ngIf="role === 'ROLE_ADMIN'">
+                        <nav> 
+                            <ul>
+                                <li>
+                                    <a href="requests">
+                                        Request
+                                    </a>
+                                </li>
+                            </ul>					
+                        </nav>    
+					</div>
                     <div class="user-account">
 						<div class="user-info" (click)="makeVisibleUserAcccountSettings()" style="cursor: pointer;">
 							<img src="http://via.placeholder.com/30x30" alt="">
@@ -71,6 +80,7 @@
 								<div class="right-sidebar">
 									<div class="widget widget-about">
 										<img src="images/wd-logo.png" alt="">
+										<br> My profile
 										<ul class="social_links">
 											<li><a title=""><i class="la la-smile-o"></i> {{ user.username }} </a></li>
 											<li><a title=""><i class="la la-user"></i> {{ user.firstName }} {{ user.lastName }} </a></li>
@@ -78,24 +88,20 @@
 										</ul>
 									</div>
 								</div>
-							</div>
-
-                            <!-- LEFT SIDEBAR -->
-                            <!-- <div class="col-lg-3">	
-								<div class="main-left-sidebar">
-									<div class="user_profile">
-										<div class="user-pro-img">
-											<img src="http://via.placeholder.com/170x170" alt="">
-											<a href="#" title=""><i class="fa fa-camera"></i></a>
+								
+								<div class="right-sidebar" *ngIf="role === 'ROLE_COMPANY_OWNER'">
+									<div class="widget widget-about">
+										<img src="images/wd-logo.png" alt="">
+										<h3>Create new job offer and expand your business!</h3>
+										<span></span>
+										<div class="sign_link" style="background-color: #265191;">
+											<h3><a routerLink="." style="color: white;" (click)="newJobOffer()">New job offer</a></h3>
 										</div>
-										<ul class="social_links">
-											<li><a title=""><i class="la la-user"></i> {{ user.firstName }} {{ user.lastName }} </a></li>
-											<li><a title=""><i class="la la-at"></i> {{ user.email }} </a></li>
-										</ul>
 									</div>
 								</div>
-                    		</div> -->
+							</div>
 							
+
                             <!-- JOB OFFERS -->
                             <div class="col-lg-6">
 								<div class="main-ws-sec">
@@ -123,10 +129,6 @@
                                                     <ul class="skill-tags">
                                                         <li><a title=""> {{ j.company.name }} </a></li>
                                                         <li><a title=""> {{ j.position.name }} </a></li>
-                                                        <!-- <li><a href="#" title="">PHP</a></li>
-                                                        <li><a href="#" title="">CSS</a></li>
-                                                        <li><a href="#" title="">Javascript</a></li>
-                                                        <li><a href="#" title="">Wordpress</a></li> 	 -->
                                                     </ul>
                                                 </div>
                                             </div>
@@ -137,7 +139,19 @@
 							
                             <!-- RIGHT SIDEBAR -->
                             <div class="col-lg-3">
-								<div class="right-sidebar">
+								<div class="right-sidebar" *ngIf="role === 'ROLE_COMPANY_OWNER'">	<!-- TODO: infor o firmi-->
+									<div class="widget widget-about">
+										<img src="images/wd-logo.png" alt="">
+										<br> My company
+										<ul class="social_links">
+											<li><a title=""><i class="la la-briefcase"></i> {{ company.name }} </a></li>
+											<li><a title=""><i class="la la-pencil"></i> {{ company.description }} </a></li>
+											<li><a title=""><i class="la la-phone"></i> {{ company.phoneNumber }} </a></li>
+										</ul>
+									</div>
+								</div>
+
+								<div class="right-sidebar" *ngIf="role === 'ROLE_USER'">
 									<div class="widget widget-about">
 										<img src="images/wd-logo.png" alt="">
 										<h3>Want to promote your company?</h3>
@@ -146,6 +160,8 @@
 											<h3><a routerLink="." style="color: white;" (click)="requestCompanyRegistration()">Request</a></h3>
 										</div>
 									</div><!--widget-about end-->
+								</div>
+								<div class="right-sidebar">	
 									<div class="widget widget-jobs">
 										<div class="sd-title">
 											<h3>Top Jobs</h3>
