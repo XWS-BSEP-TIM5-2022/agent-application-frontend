@@ -47,7 +47,17 @@ export class SignUpComponent implements OnInit {
   }
 
 
-  login(){ }
+  login(){ 
+    let body = {
+      "email": this.username,
+      "password": this.password
+    }
+    this.authService.login(body)
+      .subscribe(ok => {
+        console.log(ok)
+        this.router.navigate(['feed'])
+      })
+  }
 
   onEmailChange(){
     // this.message = ""
