@@ -25,4 +25,12 @@ export class CompanyService {
   saveRegistrationRequest(request: CompanyRegistrationRequest){
     return this.http.post<any>(`${this.companyPath}/request_registration`, request)    
   }
+
+  getAllCompanyRegistrationRequests(){
+    return this.http.get<CompanyRegistrationRequest[]>(`${this.companyPath}/requests`)    
+  }
+
+  approveRequest(requestId: number){
+    return this.http.put<any>(`${this.companyPath}/approve_request/`+ requestId, undefined)    
+  }
 }

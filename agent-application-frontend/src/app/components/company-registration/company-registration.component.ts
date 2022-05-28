@@ -21,6 +21,19 @@ export class CompanyRegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUserData();
+    let username =  localStorage.getItem("user");
+
+    if (username != undefined) {
+      this.userService.getCompanyByOwnerUsername(username).subscribe(
+        (data: any) => {
+          console.log(data)
+          if (data != null) {
+            alert("User can send only one request!");
+            this.dialogRef.close(); 
+          }
+        }
+      );
+    }
   }
 
   loadUserData(){
@@ -41,9 +54,7 @@ export class CompanyRegistrationComponent implements OnInit {
 
   requestCompanyRegistration(){
     this.request.userId = this.user.id;
-
-    console.log(this.request.companyDTO)
-
+  
     this.companyService.saveRegistrationRequest(this.request).subscribe(
       (data: any) => {
         alert("Request for company registation sent!")

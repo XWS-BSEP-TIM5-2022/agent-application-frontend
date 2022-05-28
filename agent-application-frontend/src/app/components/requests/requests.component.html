@@ -1,1 +1,100 @@
-<p>requests works!</p>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>WorkWise Html Template</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+</head>
+
+<body>
+	<div class="wrapper">
+		<header>
+			<div class="container">
+				<div class="header-data">
+					<div class="logo">
+                        <nav> 
+                            <ul>
+                                <li>
+                                    <a href="/job-offers" title="">
+                                        Home
+                                    </a>
+                                </li>
+                            </ul>					
+                        </nav>    
+					</div>
+                   	<div class="logo">
+                        <nav> 
+                            <ul>
+                                <li>
+                                    <a href="/requests">
+                                        Request
+                                    </a>
+                                </li>
+                            </ul>					
+                        </nav>    
+					</div>
+                    <div class="user-account">
+						<div class="user-info" (click)="makeVisibleUserAcccountSettings()" style="cursor: pointer;">
+							<img src="http://via.placeholder.com/30x30" alt="">
+							<a> {{ user.username }}</a>
+							<i class="la la-sort-down"></i>
+						</div>
+						<div class="user-account-settingss active" *ngIf="visibleUserAcccountSettings">
+							<h3>Settings</h3>
+							<ul class="us-links">
+								<li><a href="/account-setting" title="">Account Setting</a></li>
+								<li><a title="">Privacy</a></li>
+								<li><a title="">Faqs</a></li>
+								<li><a title="">Terms & Conditions</a></li>
+							</ul>
+							<h3 class="tc"><a routerLink="." (click)="logout()">Logout</a></h3>
+						</div><!--user-account-settingss end-->
+					</div>	
+				</div><!--header-data end-->
+			</div>
+		</header><!--header end-->
+
+		<main>
+			<div style="display: flex; justify-content: center; margin: auto;">		      
+                <div class="card" style="min-width: 70vw;">
+                    <div class="card-header">
+                        <div class="card-title">Requests for company registration</div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="font-weight: bold;">#</th>
+                                    <th scope="col" style="font-weight: bold;">Company name</th>
+                                    <th scope="col" style="font-weight: bold;">Company description</th>
+                                    <th scope="col" style="font-weight: bold;">Phone number</th>
+                                    <th scope="col" style="font-weight: bold;">Owner's email</th>
+                                    <th scope="col" style="font-weight: bold;">Owner's full name</th>
+                                    <th scope="col" style="font-weight: bold;">APPROVED</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let r of requests; let i=index; let even=even">
+                                <td>{{r.id}}</td>
+                                <td>{{r.companyDTO.name}}</td>
+                                <td>{{r.companyDTO.description}}</td>
+                                <td>{{r.companyDTO.phoneNumber}}</td>
+                                <td>{{r.owner.email}} </td>
+                                <td>{{r.owner.firstName}} {{r.owner.lastName}}</td>
+                                <td *ngIf="r.approved"> <i class="la la-check" style="color: green; font-size: large;"></i> </td>
+                                <td *ngIf="!r.approved">                                     
+                                    <a routerLink="." (click)="approve(r.id)"> Approve </a>
+                                </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>					
+			</div>
+		</main>
+	</div>
+</body>
+</html>
