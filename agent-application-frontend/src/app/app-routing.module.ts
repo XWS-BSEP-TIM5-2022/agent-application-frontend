@@ -5,9 +5,9 @@ import { AccountRecoveryComponent } from './components/account-recovery/account-
 import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
 import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
-import { TestComponent } from './components/test/test.component';
 import { UserFeedComponent } from './components/user-feed/user-feed.component';
 import { RoleGuardService } from './services/role-guard.service';
+import { RequestsComponent } from './components/requests/requests.component';
 
 const routes: Routes = [
   {
@@ -17,9 +17,21 @@ const routes: Routes = [
   {
     path: 'job-offers',
     component: JobOffersComponent,
+    canActivate: [RoleGuardService], 
+    data: { 
+      expectedRole: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_COMPANY_OWNER'] 
+    }
   },
   {
-    path: 'feed',
+    path: 'requests',
+    component: RequestsComponent,
+    canActivate: [RoleGuardService], 
+    data: { 
+      expectedRole: ['ROLE_ADMIN'] 
+    }
+  },
+  {
+    path: 'feed', // TODO: delete
     component: UserFeedComponent,
     canActivate: [RoleGuardService], 
     data: { 
