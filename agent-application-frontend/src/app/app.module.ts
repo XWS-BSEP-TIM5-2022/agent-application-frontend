@@ -27,6 +27,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogLeaveComment } from './components/test/dialog-comments/dialog-data' 
 import { DialogEnterSalary } from './components/test/dialog-salary/dialog-data' 
 import { DialogEnterInterview } from './components/test/dialog-interviews/dialog-data' 
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,8 @@ import { DialogEnterInterview } from './components/test/dialog-interviews/dialog
     MatFormFieldModule,
     MatInputModule,
     BrowserAnimationsModule,
+    MatSelectModule,
+    MatButtonToggleModule,
   ],
   providers: [
     {

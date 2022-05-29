@@ -16,14 +16,22 @@ export class TestComponent implements OnInit {
 
   constructor(private testService: TestService, private http: HttpClient, public dialog: MatDialog) { }
 
+  private readonly getAllPositionsByCompanyId = environment.backend_api + 'comments/company/'; 
   private readonly getAllByCompanyId = environment.backend_api + 'comments/company/';
-  private readonly leaveComment = environment.backend_api + 'comments';
+  private readonly getAllSalaryCommentsByCompanyId = environment.backend_api + 'comments/salary/company/';
+  private readonly getAllInterviewCommentsByCompanyId = environment.backend_api + 'comments/interview/company/';
+  private readonly leaveComment = environment.backend_api + 'comments'; 
+  private readonly leaveSalaryComment = environment.backend_api + 'comments/salary'; 
+  private readonly leaveInterviewComment = environment.backend_api + 'comments/interview'; 
 
   visibleSalary: boolean = false;
   visibleComments: boolean = true;
   visibleInterviews: boolean = false;
 
   comments: any;
+  salaryComments: any;
+  interviewComments: any;
+  positions: any;
   companyId: number = 1;
 
   ngOnInit(): void {
@@ -31,8 +39,22 @@ export class TestComponent implements OnInit {
       .subscribe(data => {
         console.log(data)
         this.comments = data;
-      }
-    )
+        this.http.get<any>(`${this.getAllSalaryCommentsByCompanyId}` + this.companyId)
+          .subscribe(res => {
+            console.log(res)
+            this.salaryComments = res;
+            this.http.get<any>(`${this.getAllInterviewCommentsByCompanyId}` + this.companyId)
+              .subscribe(result => {
+                console.log(result)
+                this.interviewComments = result;
+                this.http.get<any>(`${this.getAllPositionsByCompanyId}` + this.companyId + "/positions")
+                  .subscribe(positions => {
+                    console.log(positions);
+                    this.positions = positions;
+                  })
+              })
+          })
+      })
   }
   changeVisibleComments() {
     this.visibleSalary = false;
@@ -93,8 +115,34 @@ export class TestComponent implements OnInit {
   openDialogSalary() {
     const dialogRef = this.dialog.open(DialogEnterSalary, {
       width: '500px',
-      data: {},
+      data: {positions: this.positions},
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
+      let body = {
+        "position": result.position,
+        "pay": result.pay,
+        "companyId": this.companyId,
+        "isFormerEmployee": result.isFormerEmployee,
+        "bonus" : result.bonus,
+        "fairPay" : result.fairPay,
+      }
+      const headers = new HttpHeaders({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+     });
+      this.http.post<any>(`${this.leaveSalaryComment}`, JSON.stringify(body), {'headers': headers})
+        .subscribe( data => {
+          this.http.get<any>(`${this.getAllSalaryCommentsByCompanyId}` + this.companyId)
+          .subscribe(res => {
+            this.salaryComments = res;
+          })
+        }, 
+        err => {
+          alert(err.message);
+        });
+    })
   }
 
   // ---------------------------------------------------------------------------------------------------------------------------------------------------- -->

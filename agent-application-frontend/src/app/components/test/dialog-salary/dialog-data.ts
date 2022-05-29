@@ -2,9 +2,12 @@ import { Component, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 export interface DialogData {
-    title: string;
-    content: string;
-    rating: number;
+    positions: string[];
+    position: string;
+    pay: number;
+    isFormerEmployee: boolean;
+    bonus: boolean;
+    fairPay: boolean;
   }
   
   @Component({
@@ -27,7 +30,6 @@ export interface DialogData {
     star: number = -1;
     countStar(star) {
       this.selectedValue = star;
-      this.data.rating = star
       console.log('Value of star', star);
     }
   }
