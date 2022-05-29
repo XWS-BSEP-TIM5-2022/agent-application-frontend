@@ -1,0 +1,64 @@
+<!-- <h2 mat-dialog-title>Job offer</h2>
+<mat-divider></mat-divider> -->
+<form #registrationForm = "ngForm" style="margin-top: 0.5vw; margin-left: 1vw; margin-right: 1vw; margin-bottom: 0.5vw;">
+    <div class="row" style="display: flex; justify-content: center;">  
+        <div class="row" style="margin-bottom: -1vw;">
+            <div class="form-outline; col-md-12 mb-4 pb-2">
+                <input type="text" name="userInfo" class="form-control" [(ngModel)]="userInfo" disabled/>
+                &nbsp;&nbsp; <label style="font-size: small;"> Company owner </label>    
+            </div>
+        </div>
+
+        <div class="row" style="margin-bottom: -1vw;">
+            <div class="form-outline; col-md-12 mb-4 pb-2">
+                <input type="text" name="companyName" class="form-control" [(ngModel)]="company.name" disabled/>
+                &nbsp;&nbsp; <label style="font-size: small;"> Company name </label>    
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="display: flex; justify-content: center;">  
+        <div class="row" style="margin-bottom: -1vw;">
+            <div class="form-outline; col-md-12 mb-4 pb-2">
+                <input type="text" name="positionName" class="form-control" [(ngModel)]="jobOffer.position.name" placeholder="Enter position name"/>
+                &nbsp;&nbsp; <label style="font-size: small;"> Position name </label>    
+            </div>
+        </div>
+
+        <div class="row" style="margin-bottom: -1vw;">
+            <div class="form-outline; col-md-12 mb-4 pb-2">
+                <input type="text" name="positionPay" class="form-control" [(ngModel)]="jobOffer.position.pay" placeholder="Enter position pay"/>
+                &nbsp;&nbsp; <label style="font-size: small;"> Position pay </label>    
+            </div>
+        </div>
+    </div>
+
+    <div class="row"  style="margin-bottom: -2vw;">
+        <div class="col-md-12 mb-4 pb-2" style="display: flex; justify-content: center;">
+            <mat-form-field class="example-full-width" appearance="outline" style="width: 29vw;">  
+                <textarea matInput style="height: 4vw;" name="desc" [(ngModel)]="jobOffer.jobDescription" placeholder="Job description"></textarea>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row"  style="margin-bottom: -2vw;">
+        <div class="col-md-12 mb-4 pb-2" style="display: flex; justify-content: center;">
+            <mat-form-field class="example-full-width" appearance="outline" style="width: 29vw;">  
+                <textarea matInput style="height: 4vw;" name="dailyActivities" [(ngModel)]="jobOffer.dailyActivities" placeholder="Daily activities"></textarea>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row"  style="margin-bottom: -2vw;">
+        <div class="col-md-12 mb-4 pb-2" style="display: flex; justify-content: center;">
+            <mat-form-field class="example-full-width" appearance="outline" style="width: 29vw;">  
+                <textarea matInput style="height: 4vw;" name="preconditions" [(ngModel)]="jobOffer.preconditions" placeholder="Preconditions"></textarea>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div>
+        <input class="btn btn-success btn-lg center-div" style="color:white" type="button" (click)="saveJobOffer()" value="Submit" />
+        <input class="btn btn-lg center-div" (click)="onNoClick()" type="button" value="Cancel" />
+    </div>
+</form>

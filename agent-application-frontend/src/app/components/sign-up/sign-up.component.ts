@@ -63,7 +63,7 @@ export class SignUpComponent implements OnInit {
     this.authService.login(body)
       .subscribe(ok => {
         console.log(ok)
-        this.router.navigate(['feed'])
+        this.router.navigate(['job-offers'])
       }, err => {
         alert(err.message)
       })

@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { JobOffersComponent } from './components/job-offers/job-offers.component';
 import { AccountRecoveryComponent } from './components/account-recovery/account-recovery.component';
 import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
 import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
-import { TestComponent } from './components/test/test.component';
 import { UserFeedComponent } from './components/user-feed/user-feed.component';
 import { RoleGuardService } from './services/role-guard.service';
+import { RequestsComponent } from './components/requests/requests.component';
 
 const routes: Routes = [
   {
@@ -14,7 +15,23 @@ const routes: Routes = [
     component: SignUpComponent,
   },
   {
-    path: 'feed',
+    path: 'job-offers',
+    component: JobOffersComponent,
+    canActivate: [RoleGuardService], 
+    data: { 
+      expectedRole: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_COMPANY_OWNER'] 
+    }
+  },
+  {
+    path: 'requests',
+    component: RequestsComponent,
+    canActivate: [RoleGuardService], 
+    data: { 
+      expectedRole: ['ROLE_ADMIN'] 
+    }
+  },
+  {
+    path: 'feed', // TODO: delete
     component: UserFeedComponent,
     canActivate: [RoleGuardService], 
     data: { 

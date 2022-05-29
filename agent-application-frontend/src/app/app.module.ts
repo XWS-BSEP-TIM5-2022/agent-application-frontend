@@ -1,13 +1,22 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { TokenInterceptor } from './interceptor/token-interceptor';
+import { MatDialogModule } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatDividerModule} from '@angular/material/divider';
+import { MatInputModule} from '@angular/material/input';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TestComponent } from './components/test/test.component';
 import { HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import { SignUpComponent } from './components/sign-up/sign-up.component';
-import { FormsModule } from '@angular/forms';
+import { JobOffersComponent } from './components/job-offers/job-offers.component';
+import { CompanyRegistrationComponent } from './components/company-registration/company-registration.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserFeedComponent } from './components/user-feed/user-feed.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -29,12 +38,17 @@ import { DialogEnterSalary } from './components/test/dialog-salary/dialog-data'
 import { DialogEnterInterview } from './components/test/dialog-interviews/dialog-data' 
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { RouterModule } from '@angular/router';
+import { RequestsComponent } from './components/requests/requests.component';
+import { NewJobOfferComponent } from './components/new-job-offer/new-job-offer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TestComponent,
     SignUpComponent,
+    JobOffersComponent,
+    CompanyRegistrationComponent,
     UserFeedComponent,
     ActivateAccountComponent,
     AccountRecoveryComponent,
@@ -42,6 +56,9 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     DialogLeaveComment,
     DialogEnterSalary, 
     DialogEnterInterview,
+
+    RequestsComponent,
+    NewJobOfferComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +76,15 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     BrowserAnimationsModule,
     MatSelectModule,
     MatButtonToggleModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatSliderModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatInputModule,
+    MatSnackBarModule,
+    RouterModule
   ],
   providers: [
     {

@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>WorkWise Html Template</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+</head>
+
+<body>
+	<div class="wrapper">
+		<header>
+			<div class="container">
+				<div class="header-data">
+					<div class="logo">
+                        <nav> 
+                            <ul>
+                                <li>
+                                    <a href="/job-offers" title="">
+                                        Home
+                                    </a>
+                                </li>
+                            </ul>					
+                        </nav>    
+					</div>
+                   	<div class="logo" *ngIf="role === 'ROLE_ADMIN'">
+                        <nav> 
+                            <ul>
+                                <li>
+                                    <a href="/requests">
+                                        Request
+                                    </a>
+                                </li>
+                            </ul>					
+                        </nav>    
+					</div>
+                    <div class="user-account">
+						<div class="user-info" (click)="makeVisibleUserAcccountSettings()" style="cursor: pointer;">
+							<img src="http://via.placeholder.com/30x30" alt="">
+							<a> {{ user.username }}</a>
+							<i class="la la-sort-down"></i>
+						</div>
+						<div class="user-account-settingss active" *ngIf="visibleUserAcccountSettings">
+							<h3>Settings</h3>
+							<ul class="us-links">
+								<li><a href="/account-setting" title="">Account Setting</a></li>
+								<li><a title="">Privacy</a></li>
+								<li><a title="">Faqs</a></li>
+								<li><a title="">Terms & Conditions</a></li>
+							</ul>
+							<h3 class="tc"><a routerLink="." (click)="logout()">Logout</a></h3>
+						</div><!--user-account-settingss end-->
+					</div>
+				</div><!--header-data end-->
+			</div>
+		</header><!--header end-->
+
+		<div class="search-sec">
+			<div class="container">
+				<div class="search-box">
+					<form>
+						<input type="text" name="searchCriteria" [(ngModel)]="searchCriteria" placeholder="Search ...">
+						<button type="submit" (click)="search()">Search</button>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<main>
+			<div class="main-section">
+				<div class="container">
+					<div class="main-section-data">
+						<div class="row">
+                           
+							<!-- LEFT SIDEBAR -->
+							<div class="col-lg-3">
+								<div class="right-sidebar">
+									<div class="widget widget-about">
+										<img src="images/wd-logo.png" alt="">
+										<br> My profile
+										<ul class="social_links">
+											<li><a title=""><i class="la la-smile-o"></i> {{ user.username }} </a></li>
+											<li><a title=""><i class="la la-user"></i> {{ user.firstName }} {{ user.lastName }} </a></li>
+											<li><a title=""><i class="la la-at"></i> {{ user.email }} </a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="right-sidebar" *ngIf="role === 'ROLE_COMPANY_OWNER'">
+									<div class="widget widget-about">
+										<img src="images/wd-logo.png" alt="">
+										<h3>Create new job offer and expand your business!</h3>
+										<span></span>
+										<div class="sign_link" style="background-color: #265191;">
+											<h3><a routerLink="." style="color: white;" (click)="newJobOffer()">New job offer</a></h3>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+
+                            <!-- JOB OFFERS -->
+                            <div class="col-lg-6">
+								<div class="main-ws-sec">
+                                    <ul *ngFor="let j of jobOffers; let i=index"> <!--JOB OFFERS -->
+                                        <div class="posts-section">
+                                            <div class="post-bar">
+                                                <div class="post_topbar" style="margin-left: 1vw; margin-right: 1vw; margin-top: 1vw;">
+                                                    <img src="http://via.placeholder.com/50x50" alt="">
+                                                    <div class="usy-dt">
+                                                        <div class="usy-name">                                                            
+                                                            <h3> {{ j.company.name }} </h3>
+                                                            <span> {{ j.company.description }} </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="job_descp" style="margin-left: 1vw; margin-right: 1vw;">
+                                                    <h3> Position:  {{ j.position.name }} </h3>
+                                                    <ul class="job-dt">
+                                                        <li><a title="pay"> ${{ j.position.pay }}</a></li>
+                                                    </ul>
+                                                    <h2 style="font-weight: bold;"> Job description:  </h2> <p style="color: gray;"> {{ j.jobDescription }} </p>
+                                                    <h2 style="font-weight: bold;"> Daily activities: </h2> <p style="color: gray;"> {{ j.dailyActivities }} </p>
+                                                    <h2 style="font-weight: bold;"> Preconditions:    </h2> <p style="color: gray;"> {{ j.preconditions }} </p>
+
+                                                    <ul class="skill-tags">
+                                                        <li><a title=""> {{ j.company.name }} </a></li>
+                                                        <li><a title=""> {{ j.position.name }} </a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ul>
+								</div>
+							</div>
+							
+                            <!--RIGHT SIDEBAR -->
+                            <div class="col-lg-3">
+								<div class="right-sidebar" *ngIf="role === 'ROLE_COMPANY_OWNER'">	<!-- TODO: infor o firmi-->
+									<div class="widget widget-about">
+										<img src="images/wd-logo.png" alt="">
+										<br> My company
+										<ul class="social_links">
+											<li><a title=""><i class="la la-briefcase"></i> {{ company.name }} </a></li>
+											<li><a title=""><i class="la la-pencil"></i> {{ company.description }} </a></li>
+											<li><a title=""><i class="la la-phone"></i> {{ company.phoneNumber }} </a></li>
+										</ul>
+									</div>
+								</div>
+
+								<div class="right-sidebar" *ngIf="role === 'ROLE_USER'">
+									<div class="widget widget-about">
+										<img src="images/wd-logo.png" alt="">
+										<h3>Want to promote your company?</h3>
+										<span>Request company registration</span>
+										<div class="sign_link" style="background-color: #265191;">
+											<h3><a routerLink="." style="color: white;" (click)="requestCompanyRegistration()">Request</a></h3>
+										</div>
+									</div><!--widget-about end-->
+								</div>
+								<div class="right-sidebar">	
+									<div class="widget widget-jobs">
+										<div class="sd-title">
+											<h3>Top Jobs</h3>
+											<i class="la la-ellipsis-v"></i>
+										</div>
+										<div class="jobs-list">
+											<div class="job-info">
+												<div class="job-details">
+													<h3>Senior Product Designer</h3>
+													<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
+												</div>
+												<div class="hr-rate">
+													<span>$25/hr</span>
+												</div>
+											</div><!--job-info end-->
+											<div class="job-info">
+												<div class="job-details">
+													<h3>Senior UI / UX Designer</h3>
+													<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
+												</div>
+												<div class="hr-rate">
+													<span>$25/hr</span>
+												</div>
+											</div><!--job-info end-->
+											<div class="job-info">
+												<div class="job-details">
+													<h3>Junior Seo Designer</h3>
+													<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
+												</div>
+												<div class="hr-rate">
+													<span>$25/hr</span>
+												</div>
+											</div><!--job-info end-->
+											<div class="job-info">
+												<div class="job-details">
+													<h3>Senior PHP Designer</h3>
+													<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
+												</div>
+												<div class="hr-rate">
+													<span>$25/hr</span>
+												</div>
+											</div><!--job-info end-->
+											<div class="job-info">
+												<div class="job-details">
+													<h3>Senior Developer Designer</h3>
+													<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
+												</div>
+												<div class="hr-rate">
+													<span>$25/hr</span>
+												</div>
+											</div><!--job-info end-->
+										</div><!--jobs-list end-->
+									</div><!--widget-jobs end-->
+								</div><!--right-sidebar end-->
+							</div>
+						</div>
+					</div><!-- main-section-data end-->
+				</div> 
+			</div>
+		</main>
+	</div><!--theme-layout end-->
+</body>
+</html>
