@@ -34,6 +34,7 @@
     </div>
 
 </div>
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
 <div *ngIf="visibleComments">
     <h1 class="font-weight-bold" style="font-size: 25px; justify-content: center; margin: auto; display: flex; text-transform: uppercase;">Comments</h1>
     <button mat-flat-button color="primary" style="display: flex; margin-right: 200px; float: right;" (click)="openDialog()">Leave comment</button>
@@ -41,9 +42,8 @@
         <div>
             <mat-card class="example-card" style="margin-left: 150px; margin-right: 150px;">
                 <mat-card-title>{{comment.title}} </mat-card-title>
-                <mat-card-subtitle>TODO SD: pozicija</mat-card-subtitle>
-                <mat-card-content>
-                  <p>This card indeterminates progress bar.</p>
+                <mat-card-subtitle style="color: red;">TODO SD: pozicija</mat-card-subtitle>
+                <mat-card-content style="margin-left: 30px;">
                   <p>{{comment.content}}</p>
                 </mat-card-content>
                 <mat-divider inset></mat-divider>
@@ -51,8 +51,8 @@
                   <div class="col-sm-12">
                     <ul class="list-inline rating-list" 
                         *ngFor="let star of stars" style="display: inline-block" >
-                          <li (click)="countStar(star)"
-                              [ngClass]="{'selected': star <= comment.rate }"> 
+                          <li 
+                              [ngClass]="{'selected': star <= comment.rating }"> 
                             <i class="fa fa-star"></i>
                           </li> 
                     </ul>
@@ -61,10 +61,17 @@
         </div>  
     </div>
 </div>
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
 <div *ngIf="visibleSalary">
-    Salary
+    <h1 class="font-weight-bold" style="font-size: 25px; justify-content: center; margin: auto; display: flex; text-transform: uppercase;">Salary</h1>
+    <button mat-flat-button color="primary" style="display: flex; margin-right: 200px; float: right;" (click)="openDialogSalary()">Enter salary</button>
+
 </div>
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
 <div *ngIf="visibleInterviews">
-    Interviews
+    <h1 class="font-weight-bold" style="font-size: 25px; justify-content: center; margin: auto; display: flex; text-transform: uppercase;">Interviews</h1>
+    <button mat-flat-button color="primary" style="display: flex; margin-right: 200px; float: right;" (click)="openDialogInterview()">Leave an impression from the interview</button>
+
+    
 </div>
 </div>

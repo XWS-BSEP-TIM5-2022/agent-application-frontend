@@ -9,12 +9,12 @@ export interface DialogData {
   
   @Component({
     selector: 'dialog-overview-example-dialog',
-    templateUrl: 'dialog-leave-comment.html',
-    styleUrls: ['./test.component.scss']
+    templateUrl: 'dialog-enter-salary.html',
+    styleUrls: ['../test.component.scss']
   })
-  export class DialogLeaveComment {
+  export class DialogEnterSalary {
     constructor(
-      public dialogRef: MatDialogRef<DialogLeaveComment>,
+      public dialogRef: MatDialogRef<DialogEnterSalary>,
       @Inject(MAT_DIALOG_DATA) public data: DialogData,
     ) {}
   

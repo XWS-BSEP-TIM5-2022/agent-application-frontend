@@ -24,7 +24,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field'; 
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DialogLeaveComment } from './components/test/dialog-data' 
+import { DialogLeaveComment } from './components/test/dialog-comments/dialog-data' 
+import { DialogEnterSalary } from './components/test/dialog-salary/dialog-data' 
+import { DialogEnterInterview } from './components/test/dialog-interviews/dialog-data' 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +38,8 @@ import { DialogLeaveComment } from './components/test/dialog-data'
     AccountRecoveryComponent,
     AccountSettingsComponent,
     DialogLeaveComment,
+    DialogEnterSalary, 
+    DialogEnterInterview,
   ],
   imports: [
     BrowserModule,

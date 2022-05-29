@@ -3,7 +3,9 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { TestService } from 'src/app/services/test.service';
 import { environment } from 'src/environments/environment';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { DialogLeaveComment } from './dialog-data';
+import { DialogLeaveComment } from './dialog-comments/dialog-data';
+import { DialogEnterSalary } from './dialog-salary/dialog-data';
+import { DialogEnterInterview } from './dialog-interviews/dialog-data';
 
 @Component({
   selector: 'app-test',
@@ -50,6 +52,7 @@ export class TestComponent implements OnInit {
     this.visibleInterviews = true;
   }
 
+  // ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
   stars: number[] = [1, 2, 3, 4, 5];
   selectedValue: number = -1;
   star: number = -1;
@@ -68,7 +71,7 @@ export class TestComponent implements OnInit {
         "title": result.title,
         "content": result.content,
         "companyId": this.companyId,
-        "rate": result.rating.toString(),
+        "rating": result.rating.toString(),
       }
       const headers = new HttpHeaders({
         'Accept': 'application/json',
@@ -82,6 +85,23 @@ export class TestComponent implements OnInit {
         err => {
           alert(err.message);
         });
+    });
+  }
+
+  // ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+  openDialogSalary() {
+    const dialogRef = this.dialog.open(DialogEnterSalary, {
+      width: '500px',
+      data: {},
+    });
+  }
+
+  // ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
+  openDialogInterview() {
+    const dialogRef = this.dialog.open(DialogEnterInterview, {
+      width: '500px',
+      data: {},
     });
   }
 }
