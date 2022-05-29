@@ -2,10 +2,13 @@ import { Component, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 export interface DialogData {
-    title: string;
-    content: string;
-    rating: number;
-  }
+  position: string;
+  title: string;
+  hrInterview: number;
+  technicalInterview: string;
+  rating: number;
+  positions: string[];
+}
   
   @Component({
     selector: 'dialog-overview-example-dialog',

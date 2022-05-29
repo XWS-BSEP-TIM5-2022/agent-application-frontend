@@ -85,7 +85,7 @@ export class TestComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(DialogLeaveComment, {
       width: '500px',
-      data: { comanyId: this.companyId },
+      data: { comanyId: this.companyId, positions: this.positions },
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -94,6 +94,7 @@ export class TestComponent implements OnInit {
         "content": result.content,
         "companyId": this.companyId,
         "rating": result.rating.toString(),
+        "position": result.position,
       }
       const headers = new HttpHeaders({
         'Accept': 'application/json',
@@ -149,8 +150,33 @@ export class TestComponent implements OnInit {
   openDialogInterview() {
     const dialogRef = this.dialog.open(DialogEnterInterview, {
       width: '500px',
-      data: {},
+      data: {positions: this.positions},
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      let body = {
+        "title": result.title,
+        "position": result.position,
+        "hrInterview": result.hrInterview,
+        "technicalInterview": result.technicalInterview,
+        "companyId": this.companyId,
+        "rating": result.rating.toString(),
+      }
+      const headers = new HttpHeaders({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+     });
+      this.http.post<any>(`${this.leaveInterviewComment}`, JSON.stringify(body), {'headers': headers})
+        .subscribe( data => {
+          this.http.get<any>(`${this.getAllInterviewCommentsByCompanyId}` + this.companyId)
+          .subscribe(res => {
+            this.interviewComments = res;
+          })
+        }, 
+        err => {
+          alert(err.message);
+        });
+    })
   }
 }
 
