@@ -26,13 +26,8 @@ import { AccountRecoveryComponent } from './components/account-recovery/account-
 import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-import { MatDividerModule } from '@angular/material/divider';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field'; 
-import { MatInputModule } from '@angular/material/input';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogLeaveComment } from './components/test/dialog-comments/dialog-data' 
 import { DialogEnterSalary } from './components/test/dialog-salary/dialog-data' 
 import { DialogEnterInterview } from './components/test/dialog-interviews/dialog-data' 
@@ -67,13 +62,9 @@ import { NewJobOfferComponent } from './components/new-job-offer/new-job-offer.c
     FormsModule,
     MatIconModule,
     MatCardModule,
-    MatDividerModule,
     MatRadioModule,
-    MatButtonModule,
-    MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    BrowserAnimationsModule,
     MatSelectModule,
     MatButtonToggleModule,
     ReactiveFormsModule,
@@ -82,9 +73,8 @@ import { NewJobOfferComponent } from './components/new-job-offer/new-job-offer.c
     BrowserAnimationsModule,
     MatButtonModule,
     MatDividerModule,
-    MatInputModule,
     MatSnackBarModule,
-    RouterModule
+    RouterModule,
   ],
   providers: [
     {

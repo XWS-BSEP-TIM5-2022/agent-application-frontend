@@ -32,7 +32,7 @@ export class TestComponent implements OnInit {
   salaryComments: any;
   interviewComments: any;
   positions: any;
-  companyId: number = 1;
+  companyId: number = 1; // TODO SD: promeniti
 
   ngOnInit(): void {
     this.http.get<any>(`${this.getAllByCompanyId}` + this.companyId)
