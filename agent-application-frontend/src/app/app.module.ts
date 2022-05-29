@@ -19,7 +19,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatRadioModule } from '@angular/material/radio';
-
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field'; 
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DialogLeaveComment } from './components/test/dialog-data' 
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +33,8 @@ import { MatRadioModule } from '@angular/material/radio';
     UserFeedComponent,
     ActivateAccountComponent,
     AccountRecoveryComponent,
-    AccountSettingsComponent
+    AccountSettingsComponent,
+    DialogLeaveComment,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +45,11 @@ import { MatRadioModule } from '@angular/material/radio';
     MatCardModule,
     MatDividerModule,
     MatRadioModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     {

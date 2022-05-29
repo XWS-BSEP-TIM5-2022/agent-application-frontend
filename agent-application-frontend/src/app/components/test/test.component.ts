@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { TestService } from 'src/app/services/test.service';
 import { environment } from 'src/environments/environment';
-
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { DialogLeaveComment } from './dialog-data';
 
 @Component({
   selector: 'app-test',
@@ -11,7 +12,7 @@ import { environment } from 'src/environments/environment';
 })
 export class TestComponent implements OnInit {
 
-  constructor(private testService: TestService, private http: HttpClient) { }
+  constructor(private testService: TestService, private http: HttpClient, public dialog: MatDialog) { }
 
   private readonly getAllByCompanyId = environment.backend_api + 'comments/company/1';
 
@@ -57,4 +58,20 @@ export class TestComponent implements OnInit {
     console.log('Value of star', star);
   }
 
+
+  animal: any;
+  name: string = "";
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogLeaveComment, {
+      width: '500px',
+      data: {},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+      console.log(result)
+    });
+  }
 }
+

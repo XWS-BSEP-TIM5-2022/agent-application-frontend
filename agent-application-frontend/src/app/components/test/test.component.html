@@ -35,8 +35,8 @@
 
 </div>
 <div *ngIf="visibleComments">
-    <h1 class="font-weight-bold" style="font-size: 20px; justify-content: center; margin: auto; display: flex;">Comments</h1>
-    <mat-button></mat-button>
+    <h1 class="font-weight-bold" style="font-size: 25px; justify-content: center; margin: auto; display: flex; text-transform: uppercase;">Comments</h1>
+    <button mat-flat-button color="primary" style="display: flex; margin-right: 200px; float: right;" (click)="openDialog()">Leave comment</button>
     <div *ngFor="let comment of comments" style="margin: 50px; border: 1px; border-color: blue;">
         <div>
             <mat-card class="example-card" style="margin-left: 150px; margin-right: 150px;">
