@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CompanyService } from 'src/app/services/company.service';
 import { UserService } from 'src/app/services/user.service';
 import { CompanyRegistrationComponent } from '../company-registration/company-registration.component';
+import { NewJobOfferComponent } from '../new-job-offer/new-job-offer.component';
 
 @Component({
   selector: 'app-job-offers',
@@ -83,7 +84,14 @@ export class JobOffersComponent implements OnInit {
   }
 
   newJobOffer(){
+    const dialogRef = this.dialog.open(NewJobOfferComponent, {
+      width: '37vw',
+      data: {},
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      window.location.reload();
+    });
   }
 
   search(){

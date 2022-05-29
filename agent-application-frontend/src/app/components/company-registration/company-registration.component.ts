@@ -48,10 +48,6 @@ export class CompanyRegistrationComponent implements OnInit {
     }
   }
 
-  onNoClick(){
-    this.dialogRef.close();
-  }
-
   requestCompanyRegistration(){
     this.request.userId = this.user.id;
   
@@ -61,5 +57,9 @@ export class CompanyRegistrationComponent implements OnInit {
         this.dialogRef.close(); 
       }
     )
+  }
+
+  onNoClick(){
+    this.dialogRef.close();
   }
 }

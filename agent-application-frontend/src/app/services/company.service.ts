@@ -33,4 +33,8 @@ export class CompanyService {
   approveRequest(requestId: number){
     return this.http.put<any>(`${this.companyPath}/approve_request/`+ requestId, undefined)    
   }
+
+  saveJobOffer(jobOffer: JobOffer){
+    return this.http.post<any>(`${this.companyPath}/` + jobOffer.companyId +  `/job_offer`, jobOffer)    
+  }
 }

@@ -26,6 +26,7 @@ import { AccountRecoveryComponent } from './components/account-recovery/account-
 import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
 import { RouterModule } from '@angular/router';
 import { RequestsComponent } from './components/requests/requests.component';
+import { NewJobOfferComponent } from './components/new-job-offer/new-job-offer.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { RequestsComponent } from './components/requests/requests.component';
     AccountRecoveryComponent,
     AccountSettingsComponent,
     RequestsComponent,
+    NewJobOfferComponent,
   ],
   imports: [
     BrowserModule,
