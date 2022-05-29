@@ -9,6 +9,8 @@ import { UserFeedComponent } from './components/user-feed/user-feed.component';
 import { RoleGuardService } from './services/role-guard.service';
 import { RequestsComponent } from './components/requests/requests.component';
 import { TestComponent } from './components/test/test.component';
+import { CompaniesComponent } from './components/companies/companies.component';
+import { CompanyProfileComponent } from './components/company-profile/company-profile.component';
 
 const routes: Routes = [
   {
@@ -57,8 +59,18 @@ const routes: Routes = [
   }, 
   {
     path: 'test',
-    component: TestComponent,
+    component: TestComponent, // TODO SD: guard
   },
+  {
+    path: 'companies',
+    component: CompaniesComponent, // TODO SD
+  },
+  {
+    path: 'company/:id',
+    component: CompanyProfileComponent, // TODO SD: guard
+  },
+  
+
 
 ];
 

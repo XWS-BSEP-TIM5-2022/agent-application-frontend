@@ -1,0 +1,30 @@
+.rating-list li {
+    float: right;
+    color: #ddd;
+    padding: 10px 5px;
+  
+  }
+  
+  .rating-list li:hover,
+  .rating-list li:hover ~ li, .rating-list li.selected {
+    color: #ffd700;
+  }
+  
+  .rating-list {
+    display: inline-block;
+    list-style: none;
+  }
+
+  .example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
+}
+
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: none;
+}
+
+.card:active {
+  background-color: #cfcccc;
+}

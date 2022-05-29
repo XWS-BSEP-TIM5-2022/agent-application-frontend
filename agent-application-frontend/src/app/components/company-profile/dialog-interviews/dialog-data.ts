@@ -2,21 +2,22 @@ import { Component, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 export interface DialogData {
-    title: string;
-    content: string;
-    position: string;
-    positions: string[];
-    rating: number;
-  }
+  position: string;
+  title: string;
+  hrInterview: number;
+  technicalInterview: string;
+  rating: number;
+  positions: string[];
+}
   
   @Component({
     selector: 'dialog-overview-example-dialog',
-    templateUrl: 'dialog-leave-comment.html',
-    styleUrls: ['../test.component.scss']
+    templateUrl: 'dialog-enter-interview.html',
+    styleUrls: ['../company-profile.component.scss']
   })
-  export class DialogLeaveComment {
+  export class DialogEnterInterview {
     constructor(
-      public dialogRef: MatDialogRef<DialogLeaveComment>,
+      public dialogRef: MatDialogRef<DialogEnterInterview>,
       @Inject(MAT_DIALOG_DATA) public data: DialogData,
     ) {}
   
