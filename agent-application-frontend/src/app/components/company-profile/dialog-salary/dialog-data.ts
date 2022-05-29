@@ -13,7 +13,7 @@ export interface DialogData {
   @Component({
     selector: 'dialog-overview-example-dialog',
     templateUrl: 'dialog-enter-salary.html',
-    styleUrls: ['../test.component.scss']
+    styleUrls: ['../company-profile.component.scss']
   })
   export class DialogEnterSalary {
     constructor(

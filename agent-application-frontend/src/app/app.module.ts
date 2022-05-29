@@ -28,14 +28,17 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatFormFieldModule } from '@angular/material/form-field'; 
-import { DialogLeaveComment } from './components/test/dialog-comments/dialog-data' 
-import { DialogEnterSalary } from './components/test/dialog-salary/dialog-data' 
-import { DialogEnterInterview } from './components/test/dialog-interviews/dialog-data' 
+import { DialogLeaveComment } from './components/company-profile/dialog-comments/dialog-data' 
+import { DialogEnterSalary } from './components/company-profile/dialog-salary/dialog-data' 
+import { DialogEnterInterview } from './components/company-profile/dialog-interviews/dialog-data' 
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { RouterModule } from '@angular/router';
 import { RequestsComponent } from './components/requests/requests.component';
 import { NewJobOfferComponent } from './components/new-job-offer/new-job-offer.component';
+import { CompaniesComponent } from './components/companies/companies.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { CompanyProfileComponent } from './components/company-profile/company-profile.component';
 
 @NgModule({
   declarations: [
@@ -51,9 +54,10 @@ import { NewJobOfferComponent } from './components/new-job-offer/new-job-offer.c
     DialogLeaveComment,
     DialogEnterSalary, 
     DialogEnterInterview,
-
     RequestsComponent,
     NewJobOfferComponent,
+    CompaniesComponent,
+    CompanyProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,6 +79,7 @@ import { NewJobOfferComponent } from './components/new-job-offer/new-job-offer.c
     MatDividerModule,
     MatSnackBarModule,
     RouterModule,
+    MatChipsModule,
   ],
   providers: [
     {
