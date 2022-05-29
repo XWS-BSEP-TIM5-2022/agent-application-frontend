@@ -52,7 +52,7 @@
                     <ul class="list-inline rating-list" 
                         *ngFor="let star of stars" style="display: inline-block" >
                           <li (click)="countStar(star)"
-                              [ngClass]="{'selected': star <= 3 }"> <!-- (star <= selectedValue) -->
+                              [ngClass]="{'selected': star <= comment.rate }"> 
                             <i class="fa fa-star"></i>
                           </li> 
                     </ul>

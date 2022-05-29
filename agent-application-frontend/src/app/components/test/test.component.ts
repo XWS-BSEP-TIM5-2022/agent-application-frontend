@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { TestService } from 'src/app/services/test.service';
 import { environment } from 'src/environments/environment';
@@ -14,18 +14,18 @@ export class TestComponent implements OnInit {
 
   constructor(private testService: TestService, private http: HttpClient, public dialog: MatDialog) { }
 
-  private readonly getAllByCompanyId = environment.backend_api + 'comments/company/1';
+  private readonly getAllByCompanyId = environment.backend_api + 'comments/company/';
+  private readonly leaveComment = environment.backend_api + 'comments';
 
   visibleSalary: boolean = false;
   visibleComments: boolean = true;
   visibleInterviews: boolean = false;
 
   comments: any;
-
-  // stars: number[] = [1, 2, 3, 4, 5];
+  companyId: number = 1;
 
   ngOnInit(): void {
-    this.http.get<any>(`${this.getAllByCompanyId}`)
+    this.http.get<any>(`${this.getAllByCompanyId}` + this.companyId)
       .subscribe(data => {
         console.log(data)
         this.comments = data;
@@ -55,22 +55,33 @@ export class TestComponent implements OnInit {
   star: number = -1;
   countStar(star) {
     this.selectedValue = star;
-    console.log('Value of star', star);
   }
-
-
-  animal: any;
-  name: string = "";
+  
   openDialog() {
     const dialogRef = this.dialog.open(DialogLeaveComment, {
       width: '500px',
-      data: {},
+      data: { comanyId: this.companyId },
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
-      console.log(result)
+      let body = {
+        "title": result.title,
+        "content": result.content,
+        "companyId": this.companyId,
+        "rate": result.rating.toString(),
+      }
+      const headers = new HttpHeaders({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+     });
+      this.http.post<any>(`${this.leaveComment}`, JSON.stringify(body), {'headers': headers})
+        .subscribe( data => {
+          let comms = data;
+          this.comments.push(comms);
+        }, 
+        err => {
+          alert(err.message);
+        });
     });
   }
 }
