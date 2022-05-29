@@ -12,7 +12,7 @@ import { MatInputModule} from '@angular/material/input';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TestComponent } from './components/test/test.component';
-import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { JobOffersComponent } from './components/job-offers/job-offers.component';
 import { CompanyRegistrationComponent } from './components/company-registration/company-registration.component';
@@ -24,6 +24,15 @@ import { RoleGuardService } from './services/role-guard.service';
 import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
 import { AccountRecoveryComponent } from './components/account-recovery/account-recovery.component';
 import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatFormFieldModule } from '@angular/material/form-field'; 
+import { DialogLeaveComment } from './components/test/dialog-comments/dialog-data' 
+import { DialogEnterSalary } from './components/test/dialog-salary/dialog-data' 
+import { DialogEnterInterview } from './components/test/dialog-interviews/dialog-data' 
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { RouterModule } from '@angular/router';
 import { RequestsComponent } from './components/requests/requests.component';
 import { NewJobOfferComponent } from './components/new-job-offer/new-job-offer.component';
@@ -39,6 +48,10 @@ import { NewJobOfferComponent } from './components/new-job-offer/new-job-offer.c
     ActivateAccountComponent,
     AccountRecoveryComponent,
     AccountSettingsComponent,
+    DialogLeaveComment,
+    DialogEnterSalary, 
+    DialogEnterInterview,
+
     RequestsComponent,
     NewJobOfferComponent,
   ],
@@ -47,15 +60,21 @@ import { NewJobOfferComponent } from './components/new-job-offer/new-job-offer.c
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    MatIconModule,
+    MatCardModule,
+    MatRadioModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonToggleModule,
     ReactiveFormsModule,
     MatDialogModule,
     MatSliderModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatDividerModule,
-    MatInputModule,
     MatSnackBarModule,
-    RouterModule
+    RouterModule,
   ],
   providers: [
     {

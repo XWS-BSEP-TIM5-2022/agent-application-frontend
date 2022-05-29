@@ -8,6 +8,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { UserFeedComponent } from './components/user-feed/user-feed.component';
 import { RoleGuardService } from './services/role-guard.service';
 import { RequestsComponent } from './components/requests/requests.component';
+import { TestComponent } from './components/test/test.component';
 
 const routes: Routes = [
   {
@@ -54,6 +55,11 @@ const routes: Routes = [
       expectedRole: 'ROLE_USER' //['User', 'Admin']
     }
   }, 
+  {
+    path: 'test',
+    component: TestComponent,
+  },
+
 ];
 
 @NgModule({
