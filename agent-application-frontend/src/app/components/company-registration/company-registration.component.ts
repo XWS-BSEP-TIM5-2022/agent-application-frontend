@@ -51,12 +51,27 @@ export class CompanyRegistrationComponent implements OnInit {
   requestCompanyRegistration(){
     this.request.userId = this.user.id;
   
-    this.companyService.saveRegistrationRequest(this.request).subscribe(
-      (data: any) => {
-        alert("Request for company registation sent!")
-        this.dialogRef.close(); 
+    if (this.request.companyDTO.name.trim() != "" && this.request.companyDTO.description.trim() != "" && this.request.companyDTO.phoneNumber.trim() != ""){
+      
+      // broj telefona pocinje znakom '+', a zatim mogu biti samo cifre
+      if (this.request.companyDTO.phoneNumber[0] == "+"){
+        let isnum = /^\d+$/.test(this.request.companyDTO.phoneNumber.substring(this.request.companyDTO.phoneNumber.indexOf('+') + 1));
+        if (isnum) {
+          this.companyService.saveRegistrationRequest(this.request).subscribe(
+            (data: any) => {
+              alert("Request for company registation sent!")
+              this.dialogRef.close(); 
+            }
+          )
+       } else {
+        alert("Wrong format for phone number!");
+       }
+      } else  {
+        alert("Wrong format for phone number!");
       }
-    )
+    } else {
+      alert("All fields must be filled!");
+    }
   }
 
   onNoClick(){
