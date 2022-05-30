@@ -151,8 +151,7 @@ export class CompanyProfileComponent implements OnInit {
       }
       this.commentService.leaveComment(body).subscribe( 
         data => {
-          let comms = data;
-          this.comments.push(comms);
+          this.loadCompanyComments();
         }, 
         err => {
           alert(err.message);
