@@ -32,6 +32,7 @@ export class CompanyProfileComponent implements OnInit {
   user: User;
   role: string;
   visibleUserAcccountSettings: boolean = false;
+  isUserCompanyOwner: boolean = false;
 
   visibleSalary: boolean = false;
   visibleComments: boolean = true;
@@ -90,8 +91,11 @@ export class CompanyProfileComponent implements OnInit {
 
     if (username != undefined){
       this.userService.getByUsername(username).subscribe(
-        (user: User) => {
-        this.user = user;
+        (user) => {
+          this.user = user;
+          if(user.companyDTO.id == this.id) {
+            this.isUserCompanyOwner = true;
+          }
       })
     }
 
