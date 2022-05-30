@@ -2,31 +2,43 @@
 <div mat-dialog-content>
   <mat-form-field appearance="fill" style="margin-left: 25px; justify-content: center; background-color: none; width: 400px; ">
     <mat-label>Comment title</mat-label>
-    <input matInput [(ngModel)]="data.title" name="title" style="margin: auto; background-color: none; width: 400px;">
+    <input matInput [(ngModel)]="data.title" name="title" style="margin: auto; background-color: none; width: 400px;" [formControl]="titleFormControl">
+    <mat-error *ngIf="titleFormControl.hasError('required')">
+      Title is <strong>required</strong>
+    </mat-error>
   </mat-form-field><br>
   <mat-form-field appearance="fill" style="margin-left: 25px; justify-content: center; background-color: none; width: 400px; ">
     <mat-label>Position</mat-label>
-    <mat-select [(ngModel)]="data.position" name="food">
+    <mat-select [(ngModel)]="data.position" name="food" [formControl]="positionFormControl">
       <mat-option *ngFor="let food of data.positions" [value]="food">
         {{food}}
       </mat-option>
     </mat-select>
+    <mat-error *ngIf="positionFormControl.hasError('required')">
+      Position is <strong>required</strong>
+    </mat-error>
 </mat-form-field><br>
   <mat-form-field appearance="fill" style="margin: auto; margin-left: 25px; justify-content: center; background-color: none; width: 400px; ">
     <mat-label>Content</mat-label>
-    <textarea matInput [(ngModel)]="data.content" name="content" style="margin: auto; background-color: none; width: 400px; height: 180px;"></textarea>
+    <textarea matInput [(ngModel)]="data.content" name="content" style="margin: auto; background-color: none; width: 400px; height: 180px;" [formControl]="contentFormControl"></textarea>
+    <mat-error *ngIf="contentFormControl.hasError('required')">
+      Content is <strong>required</strong>
+    </mat-error>
   </mat-form-field><br>
   <div class="col-sm-12"  style="margin: auto; justify-content: center; display: flex;">
-    <ul class="list-inline rating-list" 
+    <ul class="list-inline rating-list"
         *ngFor="let star of stars" style="display: inline-block" >
-          <li (click)="countStar(star)"
+          <li (click)="countStar(star)" 
               [ngClass]="{'selected': star <= selectedValue }"> 
             <i class="fa fa-star" style="font-size: 25px;"></i>
           </li> 
     </ul>
 </div>
+<mat-error *ngIf="starsError" style="margin: auto; display: flex; justify-content: center; margin-bottom: 5-x">
+  Rating is required
+</mat-error>
 </div>
 <div mat-dialog-actions style="float: right;">
   <button mat-button (click)="onNoClick()">Close</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial [disabled]="checkIfFormIsInvalid()" >Save</button>
 </div>
