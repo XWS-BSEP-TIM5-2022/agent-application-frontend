@@ -56,14 +56,31 @@ export class NewJobOfferComponent implements OnInit {
   saveJobOffer(){
     this.jobOffer.companyId = this.company.id;
 
-    console.log(this.jobOffer)
+    if (this.jobOffer.position.name.trim() != "" && this.jobOffer.position.pay != 0 && 
+        this.jobOffer.dailyActivities.trim() != "" && this.jobOffer.preconditions.trim() != "" && 
+        this.jobOffer.jobDescription.trim() != "") {
 
-    this.companyService.saveJobOffer(this.jobOffer).subscribe(
-      (data: any) => {
-        alert("New job offer successfully created!")
-        this.dialogRef.close();
-      }
-    );
+          var format = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+          let isnum = /^\d+$/.test(this.jobOffer.position.name);
+
+          if (format.test(this.jobOffer.position.name) || isnum){ // provera da li 'name' polje sadrzi specijalni karakter ili broj
+            alert("Position name can not include special characters or numbers!")
+          } else {
+            if (!isNaN(this.jobOffer.position.pay)) {   // provera da li je 'pay' polje tipa number
+              this.companyService.saveJobOffer(this.jobOffer).subscribe(
+                (data: any) => {
+                  alert("New job offer successfully created!")
+                  this.dialogRef.close();
+                }
+              );
+            }
+            else {
+              alert("Pay field must be numeric value!");
+            }
+          }
+    } else {
+      alert("All fields must be filled!");
+    }
   }
 
   onNoClick(){
