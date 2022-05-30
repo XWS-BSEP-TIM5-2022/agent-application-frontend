@@ -23,8 +23,6 @@ export interface DialogData {
     stars: number[] = [1, 2, 3, 4, 5];
     selectedValue: number = 0;
     star: number = -1;
-    formIsInvalid: boolean = true;
-    errorMessage: string = '';
 
     titleFormControl = new FormControl('', [Validators.required]);
     positionFormControl = new FormControl('', [Validators.required]);
@@ -53,5 +51,4 @@ export interface DialogData {
         return false;
       }
     }
-
   }
