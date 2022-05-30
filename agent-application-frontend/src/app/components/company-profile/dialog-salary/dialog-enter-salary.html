@@ -2,44 +2,59 @@
  <div mat-dialog-content>
   <mat-form-field appearance="fill" style="margin-left: 25px; justify-content: center; background-color: none; width: 400px; ">
       <mat-label>Position</mat-label>
-      <mat-select [(ngModel)]="data.position" name="food">
+      <mat-select [(ngModel)]="data.position" [formControl]="positionFormControl" name="food">
         <mat-option *ngFor="let food of data.positions" [value]="food">
           {{food}}
         </mat-option>
       </mat-select>
+      <mat-error *ngIf="positionFormControl.hasError('required')">
+        This field is <strong>required</strong>
+      </mat-error>
   </mat-form-field><br>
 
   <mat-form-field appearance="fill" style="margin: auto; margin-left: 25px; justify-content: center; background-color: none; width: 400px; ">
     <mat-label>Pay (in $)</mat-label>
-        <input matInput [(ngModel)]="data.pay" name="pay" type="number" style="margin: auto; background-color: none; width: 400px;">
+        <input matInput [(ngModel)]="data.pay" [formControl]="payFormControl" name="pay" type="number" style="margin: auto; background-color: none; width: 400px;">
+        <mat-error *ngIf="payFormControl.hasError('required')">
+          This field is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="payFormControl.hasError('min')">
+          Pay is always more than $100
+        </mat-error>
     <!-- <textarea matInput [(ngModel)]="data.pay" name="content" style="margin: auto; background-color: none; width: 400px; height: 180px;"></textarea> -->
   </mat-form-field><br>
 
   <mat-form-field appearance="fill" style="margin: auto; margin-left: 25px; justify-content: center; background-color: none; width: 400px; ">
-    <mat-label>Employee</mat-label>
-    <input matInput hidden name="pay" type="number" style="margin: auto; background-color: none; width: 400px;">
-    <mat-button-toggle-group style="margin: auto; display: flex; justify-content: center; margin-top: 20px; border: none;" name="fontStyle" aria-label="Font Style" [(ngModel)]="data.isFormerEmployee">
-      <mat-button-toggle value="false">Current</mat-button-toggle>
-      <mat-button-toggle value="true">Former</mat-button-toggle>
-    </mat-button-toggle-group>
+    <mat-label>Employee</mat-label>  
+    <mat-select name="food" [(ngModel)]="data.isFormerEmployee" [formControl]="isFormerEmployeeFormControl">
+      <mat-option [value]="true">Former</mat-option>
+      <mat-option [value]="false">Current</mat-option>
+    </mat-select>
+    <mat-error *ngIf="isFormerEmployeeFormControl.hasError('required')">
+      This field is <strong>required</strong>
+    </mat-error>
   </mat-form-field><br>
   
   <mat-form-field appearance="fill" style="margin: auto; margin-left: 25px; justify-content: center; background-color: none; width: 400px; ">
     <mat-label>Do you have extra bonuses?</mat-label>
-    <input matInput hidden name="pay" type="number" style="margin: auto; background-color: none; width: 400px;">
-    <mat-button-toggle-group style="margin: auto; display: flex; justify-content: center; margin-top: 20px; border: none;" name="fontStyle" aria-label="Font Style" [(ngModel)]="data.bonus">
-      <mat-button-toggle value="true">Yes</mat-button-toggle>
-      <mat-button-toggle value="false">No</mat-button-toggle>
-    </mat-button-toggle-group>
+    <mat-select name="food2" [(ngModel)]="data.bonus" [formControl]="bonusFormControl">
+      <mat-option [value]="true">Yes</mat-option>
+      <mat-option [value]="false">No</mat-option>
+    </mat-select>
+    <mat-error *ngIf="bonusFormControl.hasError('required')">
+      This field is <strong>required</strong>
+    </mat-error>
   </mat-form-field><br>
 
   <mat-form-field appearance="fill" style="margin: auto; margin-left: 25px; justify-content: center; background-color: none; width: 400px; ">
     <mat-label>Do you think the salary is fair?</mat-label>
-    <input matInput hidden name="pay" type="number" style="margin: auto; background-color: none; width: 400px;">
-    <mat-button-toggle-group style="margin: auto; display: flex; justify-content: center; margin-top: 20px; border: none;" name="fontStyle" aria-label="Font Style" [(ngModel)]="data.fairPay">
-      <mat-button-toggle value="true">Yes</mat-button-toggle>
-      <mat-button-toggle value="false">No</mat-button-toggle>
-    </mat-button-toggle-group>
+    <mat-select name="food3" [(ngModel)]="data.fairPay" [formControl]="fairPayFormControl">
+      <mat-option [value]="true">Yes</mat-option>
+      <mat-option [value]="false">No</mat-option>
+    </mat-select>
+    <mat-error *ngIf="fairPayFormControl.hasError('required')">
+      This field is <strong>required</strong>
+    </mat-error>
   </mat-form-field><br>
 
   <!-- <div class="col-sm-12"  style="margin: auto; justify-content: center; display: flex;">
@@ -54,5 +69,5 @@
 </div>
 <div mat-dialog-actions style="float: right;">
   <button mat-button (click)="onNoClick()">Close</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial [disabled]="checkIfFormIsInvalid()">Save</button>
 </div>
