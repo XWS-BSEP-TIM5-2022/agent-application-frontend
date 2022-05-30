@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { first } from 'rxjs';
+import { Company } from 'src/app/model/company';
 import { CompanyRegistrationRequest } from 'src/app/model/company-registration-request';
 import { User } from 'src/app/model/user';
 import { UserClass } from 'src/app/model/user-class';
@@ -18,6 +20,7 @@ export class CompanyRegistrationComponent implements OnInit {
   user: UserClass;
   userInfo: string;
   request: CompanyRegistrationRequest = new CompanyRegistrationRequest;
+  allCompanies: Company[] = [];
 
   ngOnInit(): void {
     this.loadUserData();
@@ -34,6 +37,8 @@ export class CompanyRegistrationComponent implements OnInit {
         }
       );
     }
+
+    this.loadAllCompanies();
   }
 
   loadUserData(){
@@ -57,12 +62,16 @@ export class CompanyRegistrationComponent implements OnInit {
       if (this.request.companyDTO.phoneNumber[0] == "+"){
         let isnum = /^\d+$/.test(this.request.companyDTO.phoneNumber.substring(this.request.companyDTO.phoneNumber.indexOf('+') + 1));
         if (isnum) {
-          this.companyService.saveRegistrationRequest(this.request).subscribe(
-            (data: any) => {
-              alert("Request for company registation sent!")
-              this.dialogRef.close(); 
-            }
-          )
+          if (this.nameIsUnique(this.request.companyDTO.name)){
+            this.companyService.saveRegistrationRequest(this.request).subscribe(
+              (data: any) => {
+                alert("Request for company registation sent!")
+                this.dialogRef.close(); 
+              }
+            )
+          } else {
+            alert("Company name must be unique!");
+          }
        } else {
         alert("Wrong format for phone number!");
        }
@@ -72,6 +81,24 @@ export class CompanyRegistrationComponent implements OnInit {
     } else {
       alert("All fields must be filled!");
     }
+  }
+
+  nameIsUnique(name: string){
+    for(let c of this.allCompanies){
+      if (c.name == name){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  loadAllCompanies(){
+    this.companyService.getAll().subscribe(
+      (data: Company[]) => {
+        this.allCompanies = data;
+        console.log(this.allCompanies)
+      }
+    )
   }
 
   onNoClick(){

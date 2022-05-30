@@ -1961,8 +1961,8 @@ select {
 /* ================= sign-in ================ */
 
 .sign-in {
-	background-color: #3273a8;
-	height: 60vw;  /* height: 100%; */
+	background-color: #3273a8; 
+	height: 100%;
 }
 .sign-in-page {
 	float: left;

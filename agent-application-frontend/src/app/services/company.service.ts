@@ -37,4 +37,8 @@ export class CompanyService {
   saveJobOffer(jobOffer: JobOffer){
     return this.http.post<any>(`${this.companyPath}/` + jobOffer.companyId +  `/job_offer`, jobOffer)    
   }
+
+  getAll(){
+    return this.http.get<any>(`${this.companyPath}/`)    
+  }
 }
