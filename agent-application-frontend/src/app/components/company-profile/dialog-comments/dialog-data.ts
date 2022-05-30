@@ -45,7 +45,10 @@ export interface DialogData {
       if(this.selectedValue == 0) {
         this.starsError = true;
       }
-      if(this.titleFormControl.hasError('required') || this.contentFormControl.hasError('required') || this.positionFormControl.hasError('required') || this.starsError) {
+      if(this.titleFormControl.hasError('required') 
+        || this.contentFormControl.hasError('required') 
+        || this.positionFormControl.hasError('required') 
+        || this.starsError) {
         return true;
       } else {
         return false;

@@ -2,23 +2,35 @@
  <div mat-dialog-content>
   <mat-form-field appearance="fill" style="margin-left: 25px; justify-content: center; background-color: none; width: 400px; ">
     <mat-label>Title</mat-label>
-    <input matInput [(ngModel)]="data.title" name="title" style="margin: auto; background-color: none; width: 400px;">
+    <input matInput [(ngModel)]="data.title" [formControl]="titleFormControl" name="title" style="margin: auto; background-color: none; width: 400px;">
+    <mat-error *ngIf="titleFormControl.hasError('required')">
+      Title is <strong>required</strong>
+    </mat-error>
   </mat-form-field><br>
   <mat-form-field appearance="fill" style="margin-left: 25px; justify-content: center; background-color: none; width: 400px; ">
     <mat-label>Position</mat-label>
-    <mat-select [(ngModel)]="data.position" name="food">
+    <mat-select [(ngModel)]="data.position" name="food" [formControl]="positionFormControl">
       <mat-option *ngFor="let food of data.positions" [value]="food">
         {{food}}
       </mat-option>
     </mat-select>
+    <mat-error *ngIf="positionFormControl.hasError('required')">
+      Position is <strong>required</strong>
+    </mat-error>
 </mat-form-field><br>
   <mat-form-field appearance="fill" style="margin: auto; margin-left: 25px; justify-content: center; background-color: none; width: 400px; ">
     <mat-label>HR interview</mat-label>
-    <textarea matInput [(ngModel)]="data.hrInterview" name="content" style="margin: auto; background-color: none; width: 400px; height: 180px;"></textarea>
+    <textarea matInput [(ngModel)]="data.hrInterview" [formControl]="hrInterviewFormControl" name="content" style="margin: auto; background-color: none; width: 400px; height: 180px;"></textarea>
+    <mat-error *ngIf="hrInterviewFormControl.hasError('required')">
+      HR interview is <strong>required</strong>
+    </mat-error>
   </mat-form-field><br>
   <mat-form-field appearance="fill" style="margin: auto; margin-left: 25px; justify-content: center; background-color: none; width: 400px; ">
     <mat-label>Technical interview</mat-label>
-    <textarea matInput [(ngModel)]="data.technicalInterview" name="content" style="margin: auto; background-color: none; width: 400px; height: 180px;"></textarea>
+    <textarea matInput [(ngModel)]="data.technicalInterview" [formControl]="techInterviewFormControl" name="content" style="margin: auto; background-color: none; width: 400px; height: 180px;"></textarea>
+    <mat-error *ngIf="techInterviewFormControl.hasError('required')">
+      Technical interview is <strong>required</strong>
+    </mat-error>
   </mat-form-field><br>
   <div class="col-sm-12"  style="margin: auto; justify-content: center; display: flex;">
     <ul class="list-inline rating-list" 
@@ -29,8 +41,11 @@
           </li> 
     </ul>
 </div> 
+<mat-error *ngIf="starsError" style="margin: auto; display: flex; justify-content: center; margin-bottom: 5-x">
+  Rating is required
+</mat-error>
 <!-- </div> -->
 <div mat-dialog-actions style="float: right;">
   <button mat-button (click)="onNoClick()">Close</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial [disabled]="checkIfFormIsInvalid()">Save</button>
 </div>
