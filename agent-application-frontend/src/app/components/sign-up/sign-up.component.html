@@ -36,32 +36,52 @@
 								
 								<div *ngIf="isLogin"  class="sign_in_sec current" id="tab-1">	
 									<h3>Sign in</h3>
-									<form>
+									<form [formGroup]="form">
 										<div class="row">
 											<div class="col-lg-12 no-pdd">
-												<div class="sn-field">
-													<input [(ngModel)]="username" type="text" name="username" placeholder="Username" autocomplete="off">
-													<i class="la la-user"></i>
-												</div><!--sn-field end-->
+												<div class="form-group">
+													<div class="sn-field">
+														<input [(ngModel)]="username" type="text" name="username" placeholder="Username" autocomplete="off"
+														formControlName="username"
+														class="form-control"
+														[ngClass]="{ 'is-invalid': submitted && f['username'].hasError('required') }">
+														<!-- <i class="la la-user"></i> -->
+														<mat-error *ngIf="submitted && f['username'].hasError('required')">
+															This field is <strong>required</strong>
+														</mat-error>
+													</div>
+												</div><!--sn-field end-->	
 											</div>
-											<div class="col-lg-12 no-pdd">
-												<div class="sn-field">
-													<input [(ngModel)]="password" type="password" name="password" placeholder="Password" autocomplete="off">
-													<i class="la la-lock"></i>
+											<div class="col-lg-12 no-pdd" style="margin-top: 20px;">
+												<div class="form-group">
+													<div class="sn-field">
+														<input [(ngModel)]="password" type="password" name="password" placeholder="Password" autocomplete="off"
+														formControlName="password"
+														class="form-control"
+														[ngClass]="{ 'is-invalid': submitted && f['password'].hasError('required') }"
+														>
+														<!-- <i class="la la-lock"></i> --> 
+														<mat-error *ngIf="submitted && f['username'].hasError('required')">
+															This field is <strong>required</strong>
+														</mat-error>
+														<mat-error *ngIf="submitted && f['username'].hasError('minLength')">
+															Password must contain at least 8 characters<strong></strong>
+														</mat-error>
+													</div>
 												</div>
 											</div>
 											<div>
 												<label style="color: red; font-size: 12px;">{{messageLogin}}</label>
 											</div>
-											<div class="col-lg-12 no-pdd">
+											<div class="col-lg-12 no-pdd" style="margin-top: 10px;">
 												<div class="checky-sec">
-													<div class="fgt-sec">
+													<!-- <div class="fgt-sec">
 														<input type="checkbox" name="cc" id="c1">
 														<label for="c1">
 															<span></span>
 														</label>
 														<small>Remember me</small>
-													</div><!--fgt-sec end-->
+													</div>fgt-sec end -->
 													<a href="/account-recovery" title="">Forgot Password?</a>
 												</div>
 											</div>
@@ -70,19 +90,28 @@
 											</div>
 										</div>
 									</form>
-
 								</div><!--sign_in_sec end-->
 
 								<!--Passwordless login-->
 								<div *ngIf="isPassless"  class="sign_in_sec current" id="tab-2">	
 									<h3 *ngIf="!isSubmitted">Sign in with email</h3>
-									<form *ngIf="!isSubmitted">
+									<form *ngIf="!isSubmitted" [formGroup]="passwordlessForm">
 										<div  class="row">
 											<div class="col-lg-12 no-pdd">
 												<div  class="sn-field">
-													<input [(ngModel)]="email" (focus)="onEmailChange()" type="email" name="email" placeholder="Email" autocomplete="off">
-													<i class="la la-user"></i>
+													<input [(ngModel)]="email" (focus)="onEmailChange()" type="email" name="email" placeholder="Email" autocomplete="off"
+													formControlName="email"
+														class="form-control"
+														[ngClass]="{ 'is-invalid': submitted && ff['email'].hasError('required') }"
+													>
+													<!-- <i class="la la-user"></i> -->
 												</div><!--sn-field end-->
+												<mat-error *ngIf="submitted && ff['email'].hasError('required')">
+													This field is <strong>required</strong>
+												</mat-error>
+												<mat-error *ngIf="submitted && ff['email'].hasError('email')">
+													This email is <strong>incorrect</strong>
+												</mat-error>
 												<div>
 													<label style="color: red; font-size: 12px;">{{message}}</label>
 												</div>
@@ -101,67 +130,73 @@
 								<div *ngIf="isSignup" class="sign_in_sec current" id="tab-3">
 									<h3>Sign up</h3>
 
-									<form>
+									<form [formGroup]="sform">
 										<div class="row">
 											<div class="col-lg-12 no-pdd">
-												<div class="sn-field">
-													<input [(ngModel)]="user.firstName" type="text" name="firstName" placeholder="First name*">
-													<i class="la la-user"></i>
+												<div class="sn-field" style="margin-top: 10px;">
+													<input [(ngModel)]="user.firstName" type="text" name="firstName" placeholder="First name*"
+													formControlName="firstName"
+														class="form-control"
+														[ngClass]="{ 'is-invalid': submitted && fs['firstName'].hasError('required') }">
+													<!-- <i class="la la-user"></i> -->
 												</div>
+												<mat-error *ngIf="submitted && fs['firstName'].hasError('required')">
+													First name is <strong>required</strong>
+												</mat-error>
 											</div>
 											<div class="col-lg-12 no-pdd">
-												<div class="sn-field">
-													<input type="text"  [(ngModel)]="user.lastName" name="lastName" placeholder="Last name*">
-													<i class="la la-user"></i>
+												<div class="sn-field" style="margin-top: 10px;">
+													<input type="text"  [(ngModel)]="user.lastName" name="lastName" placeholder="Last name*"
+														formControlName="lastName"
+														class="form-control"
+														[ngClass]="{ 'is-invalid': submitted && fs['lastName'].hasError('required') }">
+													<!-- <i class="la la-user"></i> -->
 												</div>
+												<mat-error *ngIf="submitted && fs['lastName'].hasError('required')">
+													Last name is <strong>required</strong>
+												</mat-error>
 											</div>
-											<div class="col-lg-12 no-pdd">
-												<div class="sn-field">
-													<input type="text"  [(ngModel)]="user.email" name="email" placeholder="Email*">
-													<i class="la la-globe"></i>
-												</div>
-											</div>
-											<div class="col-lg-12 no-pdd">
-												<div class="sn-field">
-													<input type="text"  [(ngModel)]="user.username" name="userName" placeholder="Username*">
-													<i class="la la-user"></i>
-												</div>
-											</div>
-											<!-- <div class="col-lg-12 no-pdd">
-												<div class="sn-field">
-													<input type="text" name="mobilePhone"  [(ngModel)]="user.mobileNumber" placeholder="Mobile phone">
-													<i class="la la-mobile-phone"></i>
-												</div>
-											</div> -->
-											<!-- <div class="col-lg-12 no-pdd">
-												<div class="sn-field">
-													<select (change)="selectGender($event)">
-														<option>Gender*</option>
-														<option>Male</option>
-														<option>Female</option>
-													</select>                                            
-													<i class="la la-users"></i>
-												</div>
-											</div> -->
-											<!-- <div class="col-lg-12 no-pdd">
-												<div class="sn-field">
-													<input type="text"  [(ngModel)]="user.biography" name="biography" placeholder="Biography" autocomplete="off">
-													<i class="la la-pencil-square-o"></i>
-												</div>
-											</div> -->
-
-											<!-- <div class="col-lg-12 no-pdd">
-												<div class="sn-field">
-													<input placeholder="Birth*" (change)="selectBirth()" [(ngModel)]="birth" name="birthday" class="textbox-n" type="text" onfocus="(this.type='date')" id="date">
-													<i class="la la-birthday-cake"></i>
-												</div>
-											</div> -->
 
 											<div class="col-lg-12 no-pdd">
-												<div class="sn-field">
-													<input type="password" [(ngModel)]="user.password" name="password" placeholder="Password*" autocomplete="off">
-													<i class="la la-lock"></i>
+												<div class="sn-field" style="margin-top: 10px;">
+													<input type="text"  [(ngModel)]="user.email" name="email" placeholder="Email*"
+														formControlName="email"
+														class="form-control"
+														[ngClass]="{ 'is-invalid': submitted && fs['email'].hasError('required') }">
+													<!-- <i class="la la-globe"></i> -->
 												</div>
+												<mat-error *ngIf="submitted && fs['email'].hasError('required')">
+													Email is <strong>required</strong>
+												</mat-error>
+												<mat-error *ngIf="submitted && fs['email'].hasError('email')">
+													This email is <strong>incorrect</strong>
+												</mat-error>
+											</div>
+
+											<div class="col-lg-12 no-pdd">
+												<div class="sn-field" style="margin-top: 10px;">
+													<input type="text"  [(ngModel)]="user.username" name="userName" placeholder="Username*"
+														formControlName="username"
+														class="form-control"
+														[ngClass]="{ 'is-invalid': submitted && fs['username'].hasError('required') }">
+													<!-- <i class="la la-user"></i> -->
+												</div>
+												<mat-error *ngIf="submitted && fs['username'].hasError('required')">
+													Username is <strong>required</strong>
+												</mat-error>
+											</div>
+
+											<div class="col-lg-12 no-pdd">
+												<div class="sn-field" style="margin-top: 10px;">
+													<input type="password" [(ngModel)]="user.password" name="password" placeholder="Password*" autocomplete="off"
+													formControlName="password"
+													class="form-control"
+													[ngClass]="{ 'is-invalid': submitted && fs['password'].hasError('required') }">
+													<!-- <i class="la la-lock"></i> -->
+												</div>
+												<mat-error *ngIf="submitted && fs['password'].hasError('required')">
+													Password is <strong>required</strong>
+												</mat-error>
 											</div>
 											<div class="col-lg-12 no-pdd">
 													<div>
