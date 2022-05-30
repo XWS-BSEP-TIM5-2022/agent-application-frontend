@@ -34,6 +34,7 @@ export class CompanyProfileComponent implements OnInit {
   visibleUserAcccountSettings: boolean = false;
   isUserCompanyOwner: boolean = false;
 
+  visibleProfile: boolean = false;
   visibleSalary: boolean = false;
   visibleComments: boolean = true;
   visibleInterviews: boolean = false;
@@ -116,24 +117,33 @@ export class CompanyProfileComponent implements OnInit {
     this.router.navigate(['']);  
   }
 
+  changeVisibleProfile() {
+    this.visibleSalary = false;
+    this.visibleComments = false;
+    this.visibleInterviews = false;
+    this.visibleProfile = true;
+  }
+
   changeVisibleComments() {
     this.visibleSalary = false;
     this.visibleComments = true;
     this.visibleInterviews = false;
+    this.visibleProfile = false;
   }
 
   changeVisibleSalary() {
     this.visibleSalary = true;
     this.visibleComments = false;
     this.visibleInterviews = false;
+    this.visibleProfile = false;
   }
 
   changeVisibleInterviews() {
     this.visibleSalary = false;
     this.visibleComments = false;
     this.visibleInterviews = true;
+    this.visibleProfile = false;
   }
-
 
   openDialog() {
     const dialogRef = this.dialog.open(DialogLeaveComment, {
@@ -181,6 +191,7 @@ export class CompanyProfileComponent implements OnInit {
           this.loadSalaryComments();
         }, 
         err => {
+          console.log(err)
           alert(err.message);
         }
       );

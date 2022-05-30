@@ -71,10 +71,6 @@
 		<div class="search-sec">
 			<div class="container">
 				<div class="search-box">
-					<!-- <form>
-						<input type="text" name="searchCriteria" [(ngModel)]="searchCriteria" placeholder="Search ...">
-						<button type="submit" (click)="search()">Search</button>
-					</form> -->
                     <h3 style="margin: auto; display: flex; justify-content: center; font-size: 40px;"><b>{{company.name}}</b></h3>
 					<hr>
 				</div>
@@ -86,6 +82,17 @@
                     <!-- START -->
 					<div style="margin: 10px;">
 						<div class="row row-mx-10">
+							<!-- <div class="col-px-10 mb-5 col-sm-6 col-md-4 col-lg">
+								<div class="card h-100" (click)="changeVisibleProfile()" [hidden]="!isUserCompanyOwner">
+									<div class="card-body d-flex align-items-center">
+										<div><span class="material-icons mr-3 font-size-36px">comment</span></div>
+										<div>
+											<h3 class="font-weight-bold">Profile</h3>
+										</div>
+									</div>
+								</div>
+							</div> -->
+
 							<div class="col-px-10 mb-5 col-sm-6 col-md-4 col-lg">
 								<div class="card h-100" (click)="changeVisibleComments()">
 									<div class="card-body d-flex align-items-center">
@@ -120,10 +127,37 @@
 							</div>
 						
 						</div>
+
+						<!-- <div *ngIf="visibleProfile">
+							<h1 class="font-weight-bold" style="font-size: 25px; justify-content: center; margin: auto; display: flex; text-transform: uppercase;">Company profile</h1> -->
+							<!-- <button mat-flat-button color="primary" style="display: flex; margin-right: 200px; float: right;" (click)="openDialog()" [hidden]="isUserCompanyOwner">Leave comment</button>
+							<div *ngFor="let comment of comments" style="margin: 50px; border: 1px; border-color: blue;">
+								<div>
+									<mat-card class="example-card" style="margin-left: 150px; margin-right: 150px;">
+										<mat-card-title style="margin-left: 10px; margin-bottom: 10px;">{{comment.title}} </mat-card-title>
+										<mat-card-subtitle style="margin-left: 30px; margin-bottom: 15px; margin-top: 5px;">{{comment.position}}</mat-card-subtitle>
+										<mat-card-content style="margin-left: 30px;">
+										  <p>{{comment.content}}</p>
+										</mat-card-content>
+										<mat-divider inset></mat-divider>
+										<br>
+										  <div class="col-sm-12">
+											<ul class="list-inline rating-list" 
+												*ngFor="let star of stars" style="display: inline-block" >
+												  <li 
+													  [ngClass]="{'selected': star <= comment.rating }"> 
+													<i class="fa fa-star"></i>
+												  </li> 
+											</ul>
+										</div>
+									</mat-card>
+								</div>  
+							</div> -->
+						<!-- </div> -->
 						
 						<div *ngIf="visibleComments">
 							<h1 class="font-weight-bold" style="font-size: 25px; justify-content: center; margin: auto; display: flex; text-transform: uppercase;">Company comments</h1>
-							<button mat-flat-button color="primary" style="display: flex; margin-right: 200px; float: right;" (click)="openDialog()" [disabled]="isUserCompanyOwner">Leave comment</button>
+							<button mat-flat-button color="primary" style="display: flex; margin-right: 200px; float: right;" (click)="openDialog()" [hidden]="isUserCompanyOwner">Leave comment</button>
 							<div *ngFor="let comment of comments" style="margin: 50px; border: 1px; border-color: blue;">
 								<div>
 									<mat-card class="example-card" style="margin-left: 150px; margin-right: 150px;">
@@ -150,7 +184,7 @@
 						
 						<div *ngIf="visibleSalary">
 							<h1 class="font-weight-bold" style="font-size: 25px; justify-content: center; margin: auto; display: flex; text-transform: uppercase;">Salaries</h1>
-							<button mat-flat-button color="primary" style="display: flex; margin-right: 200px; float: right;" (click)="openDialogSalary()" [disabled]="isUserCompanyOwner">Enter salary</button>
+							<button mat-flat-button color="primary" style="display: flex; margin-right: 200px; float: right;" (click)="openDialogSalary()" [hidden]="isUserCompanyOwner">Enter salary</button>
 						
 						
 							<div *ngFor="let salaryCom of salaryComments" style="margin: 50px; border: 1px; border-color: blue;">
@@ -172,7 +206,7 @@
 						
 						<div *ngIf="visibleInterviews">
 							<h1 class="font-weight-bold" style="font-size: 25px; justify-content: center; margin: auto; display: flex; text-transform: uppercase;">Interviews</h1>
-							<button mat-flat-button color="primary" style="display: flex; margin-right: 200px; float: right;" (click)="openDialogInterview()" [disabled]="isUserCompanyOwner">Leave impression</button>
+							<button mat-flat-button color="primary" style="display: flex; margin-right: 200px; float: right;" (click)="openDialogInterview()" [hidden]="isUserCompanyOwner">Leave impression</button>
 							<div *ngFor="let interview of interviewComments" style="margin: 50px; border: 1px; border-color: blue;">
 								<div>
 									<mat-card class="example-card" style="margin-left: 150px; margin-right: 150px;">
