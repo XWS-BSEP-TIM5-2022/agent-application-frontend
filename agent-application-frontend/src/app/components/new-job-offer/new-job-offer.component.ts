@@ -67,12 +67,16 @@ export class NewJobOfferComponent implements OnInit {
             alert("Position name can not include special characters or numbers!")
           } else {
             if (!isNaN(this.jobOffer.position.pay)) {   // provera da li je 'pay' polje tipa number
-              this.companyService.saveJobOffer(this.jobOffer).subscribe(
-                (data: any) => {
-                  alert("New job offer successfully created!")
-                  this.dialogRef.close();
-                }
-              );
+              if (this.jobOffer.position.pay >= 100) {
+                this.companyService.saveJobOffer(this.jobOffer).subscribe(
+                  (data: any) => {
+                    alert("New job offer successfully created!")
+                    this.dialogRef.close();
+                  }
+                );
+              } else {
+                alert("Pay must be above 100!");
+              }
             }
             else {
               alert("Pay field must be numeric value!");
