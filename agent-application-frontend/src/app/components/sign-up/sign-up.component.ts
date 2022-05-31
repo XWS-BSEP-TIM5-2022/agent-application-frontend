@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import Swal from 'sweetalert2';
 import { User } from '../../model/user'
 
 @Component({
@@ -80,30 +81,40 @@ export class SignUpComponent implements OnInit {
     return this.passwordlessForm.controls;
   }
 
-  onSubmit(): void {
-    this.submitted = true;
-    if (this.form.invalid) {
-      return;
-    }
-    console.log(JSON.stringify(this.form.value, null, 2));
-  }
-
   signUp() {
     this.submitted = true;
-    if (this.form.invalid) {
+    if (this.sform.invalid) {
       return;
     }
+
+    let pattern = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[-+_!@#$%^&*.,?:;<>=`~\\]\x22\x27\(\)\{\}\|\/\[\\\\?]).{8,}$')
+    if(!pattern.test(this.user.password) || this.user.password.includes(" ")){
+      this.messageLogin = "Password must contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character."
+      Swal.fire(
+        'Password error',
+        "Password must contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character and must not contain white spaces",
+        'error'
+      )
+      return;
+    }
+    if(this.user.password.toLowerCase().includes(this.user.username.toLowerCase())){
+      Swal.fire(
+        'Password error',
+        "Password must not contain username",
+        'error'
+      )
+      return;
+    }
+
     this.authService.signUp(this.user)
       .subscribe(ok => {
-        alert('Check your email inbox')
-        // this.router.navigate(['feed'])
-        this.user = {
-          "firstName": "",
-          "lastName": "",
-          "email": "",
-          "username": "",
-          "password" : "",
-      };
+        Swal.fire(
+          'Check your email inbox',
+          '',
+          'success'
+        ).finally( () => {
+          window.location.reload();
+        })   
       },
       err => { 
         console.log(err.error)
@@ -135,7 +146,7 @@ export class SignUpComponent implements OnInit {
 
   passwordlessLogin(){
     this.submitted = true;
-    if (this.form.invalid) {
+    if (this.passwordlessForm.invalid) {
       return;
     }
   }
