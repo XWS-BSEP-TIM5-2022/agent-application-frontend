@@ -75,7 +75,30 @@ export class NewJobOfferComponent implements OnInit {
             if (!isNaN(this.jobOffer.position.pay)) {   // provera da li je 'pay' polje tipa number
               if (this.jobOffer.position.pay >= 100) { 
                 
-                if (this.promoteJobOffer && this.apiToken.trim() != "" && this.apiToken != null){
+                if (this.promoteJobOffer) { // ukoliko se JobOffer promovise na Dislinktu
+                  if (this.apiToken.trim() != "" && this.apiToken != null) {
+                    let post = new DislinktPost;
+                    post.text = "Job Offer";
+                    post.jobOffer = this.jobOffer;
+                    post.apiToken = this.apiToken;                  
+                    post.company = this.company
+
+                    console.log(post)
+                    this.postService.addPost(post).subscribe(   // dodavanje JobOffer-a kao post u Dislinkt aplikaciji
+                    (data: any) => {
+                      console.log(data);
+                    });
+
+                    this.companyService.saveJobOffer(this.jobOffer).subscribe(  // cuvanje JobOffer-a u agentskoj bazi
+                    (data: any) => {
+                      alert("New job offer successfully created!")
+                      this.dialogRef.close();
+                    });
+                } else {
+                    alert("In order to promote your jo offer on Dislinkt, you must enter your API token!")
+                }
+            
+              } else { 
                   let post = new DislinktPost;
                   post.text = "Job Offer";
                   post.jobOffer = this.jobOffer;
@@ -93,9 +116,6 @@ export class NewJobOfferComponent implements OnInit {
                     alert("New job offer successfully created!")
                     this.dialogRef.close();
                   });
-
-                } else {
-                  alert("In order to promote your jo offer on Dislinkt, you must enter your API token!")
                 }
 
               } else {
