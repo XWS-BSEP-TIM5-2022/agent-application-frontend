@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Company } from 'src/app/model/company';
+import { DislinktPost } from 'src/app/model/dislinkt-post';
 import { JobOffer } from 'src/app/model/job-offer';
+import { Test } from 'src/app/model/test';
 import { UserClass } from 'src/app/model/user-class';
 import { CompanyService } from 'src/app/services/company.service';
+import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -13,12 +16,15 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class NewJobOfferComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<NewJobOfferComponent>, private userService: UserService, private companyService: CompanyService) { }
+  constructor(public dialogRef: MatDialogRef<NewJobOfferComponent>, private userService: UserService, private companyService: CompanyService,
+    private postService: PostService) { }
 
   userInfo: string;
   user: UserClass = new UserClass;
   company: Company = new Company;
   jobOffer: JobOffer = new JobOffer;
+  promoteJobOffer: boolean = false;
+  apiToken: string = "";
 
   ngOnInit(): void {
     this.loadUserData();
@@ -67,13 +73,31 @@ export class NewJobOfferComponent implements OnInit {
             alert("Position name can not include special characters or numbers!")
           } else {
             if (!isNaN(this.jobOffer.position.pay)) {   // provera da li je 'pay' polje tipa number
-              if (this.jobOffer.position.pay >= 100) {
-                this.companyService.saveJobOffer(this.jobOffer).subscribe(
+              if (this.jobOffer.position.pay >= 100) { 
+                
+                if (this.promoteJobOffer && this.apiToken.trim() != "" && this.apiToken != null){
+                  let post = new DislinktPost;
+                  post.id = "12";
+                  post.text = "Job Offer";
+                  post.jobOffer = this.jobOffer;
+                  post.apiToken = this.apiToken;
+                  
+                  console.log(post)
+                  this.postService.addPost(post).subscribe(   // dodavanje JobOffer-a kao post u Dislinkt aplikaciji
+                  (data: any) => {
+                    console.log(data);
+                  });
+                  
+                  this.companyService.saveJobOffer(this.jobOffer).subscribe(  // cuvanje JobOffer-a u agentskoj bazi
                   (data: any) => {
                     alert("New job offer successfully created!")
                     this.dialogRef.close();
-                  }
-                );
+                  });
+
+                } else {
+                  alert("In order to promote your jo offer on Dislinkt, you must enter your API token!")
+                }
+
               } else {
                 alert("Pay must be above 100!");
               }
@@ -89,5 +113,13 @@ export class NewJobOfferComponent implements OnInit {
 
   onNoClick(){
     this.dialogRef.close();
+  }
+
+  promoteJobOfferOnDislinkt(){
+    if (this.promoteJobOffer){
+      this.promoteJobOffer = false;
+    } else {
+      this.promoteJobOffer = true;
+    }
   }
 }
