@@ -77,9 +77,7 @@ export class NewJobOfferComponent implements OnInit {
                 
                 if (this.promoteJobOffer && this.apiToken.trim() != "" && this.apiToken != null){
                   let post = new DislinktPost;
-                  //post.id = "12";
                   post.text = "Job Offer";
-                 // post.jobOffer.company = this.company;
                   post.jobOffer = this.jobOffer;
                   post.apiToken = this.apiToken;                  
                   post.company = this.company

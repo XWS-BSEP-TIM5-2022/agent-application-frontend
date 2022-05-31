@@ -18,8 +18,4 @@ export class PostService {
   addPost(post: DislinktPost): Observable<SuccessMessage>{   
     return this.http.post<SuccessMessage>(`https://localhost:8080/api/post/agents`, post)    
   }
-
-  test(test: Test): Observable<SuccessMessage>{   
-    return this.http.post<SuccessMessage>(`https://localhost:8080/api/post/test`, test)    
-  }
 }

@@ -24,8 +24,4 @@ export class UserService {
   getByUserId(id: number){
     return this.http.get<UserClass>(`${this.userPath}/id/`+ id)    
   }
-
-  // saveApiToken(username: string, apiToken: ApiToken){
-  //   return this.http.put<any>(`${this.userPath}/`+ username, apiToken)    
-  // }
 }
