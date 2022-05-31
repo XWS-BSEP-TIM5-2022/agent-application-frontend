@@ -54,7 +54,7 @@ export class SignUpComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.formBuilder.group(
       {
-        password: ['', [Validators.required, Validators.minLength(8)]],
+        password: ['', [Validators.required]],
         username: ['', Validators.required],
       }) 
     this.passwordlessForm = this.formBuilder.group(
@@ -129,6 +129,26 @@ export class SignUpComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
+
+    // let pattern = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[-+_!@#$%^&*.,?:;<>=`~\\]\x22\x27\(\)\{\}\|\/\[\\\\?]).{8,}$')
+    // if(!pattern.test(this.user.password) || this.user.password.includes(" ")){
+    //   this.messageLogin = "Password must contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character."
+    //   Swal.fire(
+    //     'Password error',
+    //     "Password must contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character and must not contain white spaces",
+    //     'error'
+    //   )
+    //   return;
+    // }
+    // if(this.user.password.toLowerCase().includes(this.user.username.toLowerCase())){
+    //   Swal.fire(
+    //     'Password error',
+    //     "Password must not contain username",
+    //     'error'
+    //   )
+    //   return;
+    // }
+
     let body = {
       "email": this.username,
       "password": this.password
@@ -138,7 +158,11 @@ export class SignUpComponent implements OnInit {
         console.log(ok)
         this.router.navigate(['job-offers'])
       }, err => {
-        alert(err.message)
+        Swal.fire(
+          'Error',
+          err.error,
+          'error'
+        )
       })
   }
 
