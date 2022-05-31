@@ -38,7 +38,7 @@ export class AuthService {
     Swal.fire({
       icon: 'error',
       title: 'Oops...',
-      text: error.message,
+      text: error.error,
     })
     throw error;
   } 
