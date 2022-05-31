@@ -77,17 +77,19 @@ export class NewJobOfferComponent implements OnInit {
                 
                 if (this.promoteJobOffer && this.apiToken.trim() != "" && this.apiToken != null){
                   let post = new DislinktPost;
-                  post.id = "12";
+                  //post.id = "12";
                   post.text = "Job Offer";
+                 // post.jobOffer.company = this.company;
                   post.jobOffer = this.jobOffer;
-                  post.apiToken = this.apiToken;
-                  
+                  post.apiToken = this.apiToken;                  
+                  post.company = this.company
+
                   console.log(post)
                   this.postService.addPost(post).subscribe(   // dodavanje JobOffer-a kao post u Dislinkt aplikaciji
                   (data: any) => {
                     console.log(data);
                   });
-                  
+
                   this.companyService.saveJobOffer(this.jobOffer).subscribe(  // cuvanje JobOffer-a u agentskoj bazi
                   (data: any) => {
                     alert("New job offer successfully created!")
