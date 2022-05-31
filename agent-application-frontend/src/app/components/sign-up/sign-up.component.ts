@@ -29,7 +29,9 @@ export class SignUpComponent implements OnInit {
   messageLogin = "";
   messageSignUp = "";
   isSubmitted = false; 
-  submitted = false;
+  submitted1 = false;
+  submitted2 = false;
+  submitted3 = false;
   
   form: FormGroup = new FormGroup({
     username: new FormControl(''),
@@ -82,7 +84,7 @@ export class SignUpComponent implements OnInit {
   }
 
   signUp() {
-    this.submitted = true;
+    this.submitted3 = true;
     if (this.sform.invalid) {
       return;
     }
@@ -123,7 +125,7 @@ export class SignUpComponent implements OnInit {
 
 
   login(){ 
-    this.submitted = true;
+    this.submitted1 = true;
     if (this.form.invalid) {
       return;
     }
@@ -145,7 +147,7 @@ export class SignUpComponent implements OnInit {
   }
 
   passwordlessLogin(){
-    this.submitted = true;
+    this.submitted2 = true;
     if (this.passwordlessForm.invalid) {
       return;
     }
