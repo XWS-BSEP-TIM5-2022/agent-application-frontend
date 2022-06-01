@@ -47,7 +47,7 @@
                             </ul>					
                         </nav>    
 					</div>
-                    <div class="user-account">
+                    <div class="user-account" *ngIf="user">
 						<div class="user-info" (click)="makeVisibleUserAcccountSettings()" style="cursor: pointer;">
 							<img src="http://via.placeholder.com/30x30" alt="">
 							<a> {{ user.username }}</a>
@@ -86,7 +86,7 @@
 						<div class="row">
                            
 							<!-- LEFT SIDEBAR -->
-							<div class="col-lg-3">
+							<div class="col-lg-3" *ngIf="user">
 								<div class="right-sidebar">
 									<div class="widget widget-about">
 										<img src="images/wd-logo.png" alt="">
@@ -167,7 +167,13 @@
 											<li><a title=""><i class="la la-pencil"></i> {{ company.description }} </a></li>
 											<li><a title=""><i class="la la-phone"></i> {{ company.phoneNumber }} </a></li>
 										</ul>
+
+										
+									<div class="sign_link" style="background-color: #265191;">
+										<h3><a routerLink="." style="color: white;" (click)="editCompanyInfo()">Edit info</a></h3>
 									</div>
+									</div>
+
 								</div>
 
 								<div class="right-sidebar" *ngIf="role === 'ROLE_USER'">

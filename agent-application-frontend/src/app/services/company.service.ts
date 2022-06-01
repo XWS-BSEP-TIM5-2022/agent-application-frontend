@@ -41,4 +41,8 @@ export class CompanyService {
   getAll(){
     return this.http.get<any>(`${this.companyPath}/`)    
   }
+
+  updateCompanyInfo(dto){
+    return this.http.put<any>(`${this.companyPath}/updateCompanyInfo`, dto)    
+  }
 }
