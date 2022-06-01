@@ -22,7 +22,7 @@ export class EditCompanyInfoComponent implements OnInit {
   allCompanies: Company[] = [];
 
   company : Company
-  
+  oldName : string
 
   ngOnInit(): void {
     this.loadUserData();
@@ -50,6 +50,7 @@ export class EditCompanyInfoComponent implements OnInit {
       this.userService.getByUsername(username).subscribe(
         (user: any) => {
         this.user = user;
+        this.oldName = user?.companyDTO.name
         this.company = user?.companyDTO
         console.log(user.companyDTO)
 
@@ -66,12 +67,9 @@ export class EditCompanyInfoComponent implements OnInit {
         let isnum = /^\d+$/.test(this.company.phoneNumber.substring(this.company.phoneNumber.indexOf('+') + 1));
         if (isnum) {
           if (this.nameIsUnique(this.company.name)){
-            this.companyService.updateCompanyInfo(this.company).subscribe(
-              (data: any) => {
-                alert("Company info edited!!")
-                this.dialogRef.close(); 
-              }
-            )
+             this.updateCompanyInfo()
+              this.updateDislinktCompanyInfo()
+           
           }
           else {
             alert("Company name must be unique!");
@@ -87,6 +85,30 @@ export class EditCompanyInfoComponent implements OnInit {
     else {
       alert("All fields must be filled!");
     }
+  }
+
+  updateCompanyInfo(){
+    this.companyService.updateCompanyInfo(this.company).subscribe(
+      (data: any) => {
+      }
+    )
+  }
+
+  updateDislinktCompanyInfo(){
+    var dto = {
+      "name": this.company.name,
+      "description": this.company.description,
+      "phoneNumber": this.company.phoneNumber,
+      "oldName": this.oldName,
+      "isActive": this.company.isActive
+    }
+
+    this.companyService.updateCompanyInfoDislinkt(dto).subscribe(
+      (data: any) => {
+        alert("Company info edited!!")
+        this.dialogRef.close(); 
+      }
+    )
   }
 
   nameIsUnique(name: string){

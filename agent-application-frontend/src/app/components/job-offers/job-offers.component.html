@@ -122,7 +122,7 @@
 							
 
                             <!-- JOB OFFERS -->
-                            <div class="col-lg-6">
+                            <div class="col-lg-6" *ngIf="user">
 								<div class="main-ws-sec">
                                     <ul *ngFor="let j of jobOffers; let i=index"> <!--JOB OFFERS -->
                                         <div class="posts-section">
@@ -136,7 +136,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="job_descp" style="margin-left: 1vw; margin-right: 1vw;">
+                                                <div class="job_descp" style="margin-left: 1vw; margin-right: 1vw;" *ngIf="jobOffers">
                                                     <h3> Position:  {{ j.position.name }} </h3>
                                                     <ul class="job-dt">
                                                         <li><a title="pay"> ${{ j.position.pay }}</a></li>
