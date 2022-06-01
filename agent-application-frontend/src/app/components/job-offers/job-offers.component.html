@@ -47,7 +47,7 @@
                             </ul>					
                         </nav>    
 					</div>
-                    <div class="user-account">
+                    <div class="user-account" *ngIf="user">
 						<div class="user-info" (click)="makeVisibleUserAcccountSettings()" style="cursor: pointer;">
 							<img src="http://via.placeholder.com/30x30" alt="">
 							<a> {{ user.username }}</a>
@@ -86,7 +86,7 @@
 						<div class="row">
                            
 							<!-- LEFT SIDEBAR -->
-							<div class="col-lg-3">
+							<div class="col-lg-3" *ngIf="user">
 								<div class="right-sidebar">
 									<div class="widget widget-about">
 										<img src="images/wd-logo.png" alt="">
@@ -122,7 +122,7 @@
 							
 
                             <!-- JOB OFFERS -->
-                            <div class="col-lg-6">
+                            <div class="col-lg-6" *ngIf="user">
 								<div class="main-ws-sec">
                                     <ul *ngFor="let j of jobOffers; let i=index"> <!--JOB OFFERS -->
                                         <div class="posts-section">
@@ -136,7 +136,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="job_descp" style="margin-left: 1vw; margin-right: 1vw;">
+                                                <div class="job_descp" style="margin-left: 1vw; margin-right: 1vw;" *ngIf="jobOffers">
                                                     <h3> Position:  {{ j.position.name }} </h3>
                                                     <ul class="job-dt">
                                                         <li><a title="pay"> ${{ j.position.pay }}</a></li>
@@ -167,7 +167,13 @@
 											<li><a title=""><i class="la la-pencil"></i> {{ company.description }} </a></li>
 											<li><a title=""><i class="la la-phone"></i> {{ company.phoneNumber }} </a></li>
 										</ul>
+
+										
+									<div class="sign_link" style="background-color: #265191;">
+										<h3><a routerLink="." style="color: white;" (click)="editCompanyInfo()">Edit info</a></h3>
 									</div>
+									</div>
+
 								</div>
 
 								<div class="right-sidebar" *ngIf="role === 'ROLE_USER'">
