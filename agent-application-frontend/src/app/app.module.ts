@@ -39,6 +39,7 @@ import { NewJobOfferComponent } from './components/new-job-offer/new-job-offer.c
 import { CompaniesComponent } from './components/companies/companies.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { CompanyProfileComponent } from './components/company-profile/company-profile.component';
+import { EditCompanyInfoComponent } from './components/edit-company-info/edit-company-info.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { CompanyProfileComponent } from './components/company-profile/company-pr
     NewJobOfferComponent,
     CompaniesComponent,
     CompanyProfileComponent,
+    EditCompanyInfoComponent,
   ],
   imports: [
     BrowserModule,

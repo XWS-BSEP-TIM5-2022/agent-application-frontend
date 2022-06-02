@@ -1,3 +1,4 @@
+import { EditCompanyInfoComponent } from './../edit-company-info/edit-company-info.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -112,5 +113,17 @@ export class JobOffersComponent implements OnInit {
   logout(){
     this.authService.logout();
     this.router.navigate(['']);  
+  }
+
+  editCompanyInfo(){
+    const dialogRef = this.dialog.open(EditCompanyInfoComponent, {
+      width: '37vw',
+      height: '40vw',
+      data: {},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      window.location.reload();
+    });
   }
 }

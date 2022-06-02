@@ -14,6 +14,9 @@ export class CompanyService {
 
   private readonly companyPath = environment.backend_api + 'company';
 
+  private readonly dislinktPostPath = environment.dislinkt_backend_api + 'api/post';
+
+
   getAllJobOffers(){
     return this.http.get<JobOffer[]>(`${this.companyPath}/job_offer`)    
   }
@@ -40,5 +43,14 @@ export class CompanyService {
 
   getAll(){
     return this.http.get<any>(`${this.companyPath}/`)    
+  }
+
+  updateCompanyInfo(dto){
+    return this.http.put<any>(`${this.companyPath}/updateCompanyInfo`, dto)    
+  }
+
+
+  updateCompanyInfoDislinkt(dto){
+    return this.http.put<any>(`${this.dislinktPostPath}/updateCompanyInfo`, dto)    
   }
 }
