@@ -64,7 +64,7 @@
     </div>
     
 
-    <div class="col-md-12 mb-4 pb-2">
+    <div class="col-md-12 mb-4 pb-2" *ngIf="promoteJobOffer">
         <mat-form-field class="example-full-width" appearance="outline" style="width: 30vw;">  
             <textarea matInput style="height: 10vw;" name="apiToken" [(ngModel)]="apiToken" placeholder="Enter API token" [disabled]="!promoteJobOffer"></textarea>
         </mat-form-field>

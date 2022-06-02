@@ -39,7 +39,6 @@ import { NewJobOfferComponent } from './components/new-job-offer/new-job-offer.c
 import { CompaniesComponent } from './components/companies/companies.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { CompanyProfileComponent } from './components/company-profile/company-profile.component';
-import { InsertApiTokenComponent } from './components/insert-api-token/insert-api-token.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +58,6 @@ import { InsertApiTokenComponent } from './components/insert-api-token/insert-ap
     NewJobOfferComponent,
     CompaniesComponent,
     CompanyProfileComponent,
-    InsertApiTokenComponent,
   ],
   imports: [
     BrowserModule,
