@@ -79,7 +79,7 @@ export class NewJobOfferComponent implements OnInit {
                 
                 if (this.promoteJobOffer) { // ukoliko se JobOffer promovise na Dislinktu
                   if (this.apiToken.trim() != "" && this.apiToken != null) {
-                    if (!this.tokenIsExpired()){
+                    // if (!this.tokenIsExpired()){
                       let post = new DislinktPost;
                       post.text = "Job Offer";
                       post.jobOffer = this.jobOffer;
@@ -97,9 +97,9 @@ export class NewJobOfferComponent implements OnInit {
                         alert("New job offer successfully created!")
                         this.dialogRef.close();
                       });
-                    } else {
-                      alert("Token je istekao!");
-                    }
+                    // } else {
+                    //   alert("Token je istekao!");
+                    // }
                 } else {
                     alert("In order to promote your jo offer on Dislinkt, you must enter your API token!")
                 }
@@ -149,17 +149,17 @@ export class NewJobOfferComponent implements OnInit {
     }
   }
 
-  tokenIsExpired(){
-    if (this.apiToken != undefined && this.apiToken != null)  {
+  // tokenIsExpired(){
+  //   if (this.apiToken != undefined && this.apiToken != null)  {
       
-      if (!this.apiToken){
-        return true;
-      }
-      if(this.jwtHelper.isTokenExpired(this.apiToken)) {
-        console.log("Token je istekao")
-      }
-      return this.jwtHelper.isTokenExpired(this.apiToken);
-    }
-    return true;
-  }
+  //     if (!this.apiToken){
+  //       return true;
+  //     }
+  //     if(this.jwtHelper.isTokenExpired(this.apiToken)) {
+  //       console.log("Token je istekao")
+  //     }
+  //     return this.jwtHelper.isTokenExpired(this.apiToken);
+  //   }
+  //   return true;
+  // }
 }
