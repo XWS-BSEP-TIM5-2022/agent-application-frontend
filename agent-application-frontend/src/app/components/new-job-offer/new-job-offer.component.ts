@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Company } from 'src/app/model/company';
 import { DislinktPost } from 'src/app/model/dislinkt-post';
 import { JobOffer } from 'src/app/model/job-offer';
@@ -25,6 +26,7 @@ export class NewJobOfferComponent implements OnInit {
   jobOffer: JobOffer = new JobOffer;
   promoteJobOffer: boolean = false;
   apiToken: string = "";
+  public jwtHelper: JwtHelperService = new JwtHelperService();
 
   ngOnInit(): void {
     this.loadUserData();
@@ -77,6 +79,32 @@ export class NewJobOfferComponent implements OnInit {
                 
                 if (this.promoteJobOffer) { // ukoliko se JobOffer promovise na Dislinktu
                   if (this.apiToken.trim() != "" && this.apiToken != null) {
+                    if (!this.tokenIsExpired()){
+                      let post = new DislinktPost;
+                      post.text = "Job Offer";
+                      post.jobOffer = this.jobOffer;
+                      post.apiToken = this.apiToken;                  
+                      post.company = this.company
+
+                      console.log(post)
+                      this.postService.addPost(post).subscribe(   // dodavanje JobOffer-a kao post u Dislinkt aplikaciji
+                      (data: any) => {
+                        console.log(data);
+                      });
+
+                      this.companyService.saveJobOffer(this.jobOffer).subscribe(  // cuvanje JobOffer-a u agentskoj bazi
+                      (data: any) => {
+                        alert("New job offer successfully created!")
+                        this.dialogRef.close();
+                      });
+                    } else {
+                      alert("Token je istekao!");
+                    }
+                } else {
+                    alert("In order to promote your jo offer on Dislinkt, you must enter your API token!")
+                }
+            
+              } else {  
                     let post = new DislinktPost;
                     post.text = "Job Offer";
                     post.jobOffer = this.jobOffer;
@@ -93,29 +121,7 @@ export class NewJobOfferComponent implements OnInit {
                     (data: any) => {
                       alert("New job offer successfully created!")
                       this.dialogRef.close();
-                    });
-                } else {
-                    alert("In order to promote your jo offer on Dislinkt, you must enter your API token!")
-                }
-            
-              } else { 
-                  let post = new DislinktPost;
-                  post.text = "Job Offer";
-                  post.jobOffer = this.jobOffer;
-                  post.apiToken = this.apiToken;                  
-                  post.company = this.company
-
-                  console.log(post)
-                  this.postService.addPost(post).subscribe(   // dodavanje JobOffer-a kao post u Dislinkt aplikaciji
-                  (data: any) => {
-                    console.log(data);
-                  });
-
-                  this.companyService.saveJobOffer(this.jobOffer).subscribe(  // cuvanje JobOffer-a u agentskoj bazi
-                  (data: any) => {
-                    alert("New job offer successfully created!")
-                    this.dialogRef.close();
-                  });
+                    });  
                 }
 
               } else {
@@ -141,5 +147,19 @@ export class NewJobOfferComponent implements OnInit {
     } else {
       this.promoteJobOffer = true;
     }
+  }
+
+  tokenIsExpired(){
+    if (this.apiToken != undefined && this.apiToken != null)  {
+      
+      if (!this.apiToken){
+        return true;
+      }
+      if(this.jwtHelper.isTokenExpired(this.apiToken)) {
+        console.log("Token je istekao")
+      }
+      return this.jwtHelper.isTokenExpired(this.apiToken);
+    }
+    return true;
   }
 }
