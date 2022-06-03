@@ -17,7 +17,6 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { JobOffersComponent } from './components/job-offers/job-offers.component';
 import { CompanyRegistrationComponent } from './components/company-registration/company-registration.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UserFeedComponent } from './components/user-feed/user-feed.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { RoleGuardService } from './services/role-guard.service';
@@ -48,7 +47,6 @@ import { EditCompanyInfoComponent } from './components/edit-company-info/edit-co
     SignUpComponent,
     JobOffersComponent,
     CompanyRegistrationComponent,
-    UserFeedComponent,
     ActivateAccountComponent,
     AccountRecoveryComponent,
     AccountSettingsComponent,
