@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  backend_api: 'http://localhost:8090/',
+  backend_api: 'https://localhost:8090/',
   dislinkt_backend_api: 'https://localhost:8080/'
 };
 
