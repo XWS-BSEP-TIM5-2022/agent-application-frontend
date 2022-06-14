@@ -15,7 +15,7 @@ export class AuthService {
   private readonly signUpPath = environment.backend_api + 'auth/register';
   private readonly loginPath = environment.backend_api + 'auth/login';
   private readonly activateAccountPath = environment.backend_api + 'auth/activateAccount?token=';
-
+  private readonly changePasswordPath = environment.backend_api + 'users/changePassword'
 
   logged: Boolean = false;
   private access_token = null;
@@ -145,9 +145,13 @@ export class AuthService {
     localStorage.clear();
   }
 
-  changePassword(body: {oldPassword: string, newPassword: string, newReenteredPassword: string}) {
-    // return this.http.post(this.changePasswordPath, JSON.stringify(body));
+  changePassword(body: {oldPassword: string, newPassword: string, reenteredPassword: string}) {
+    const headers = new HttpHeaders({
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      // 'responseType': 'text',
+    });
+    return this.http.post(this.changePasswordPath, JSON.stringify(body), {'headers': headers});
   }
-
-
+  
 }
