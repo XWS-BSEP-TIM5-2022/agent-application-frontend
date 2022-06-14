@@ -97,7 +97,7 @@ export class AccountSettingsComponent implements OnInit {
       this.newReenteredPassword = "";
     }, err => {
       console.log(err);
-      this.openSnackBar(err.error.message, "Ok");
+      this.openSnackBar(err.error, "Ok");
     })
   }
 
