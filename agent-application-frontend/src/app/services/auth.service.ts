@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 import { environment } from "../../environments/environment";
-import Swal from 'sweetalert2';
 import { User } from '../model/user';
 import jwt_decode from "jwt-decode";
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -35,28 +34,31 @@ export class AuthService {
   }
 
   private checkError(error: any): any {
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: error.error,
-    })
+    // Swal.fire({
+    //   icon: 'error',
+    //   title: 'Oops...',
+    //   text: error.error,
+    // })
+    alert("Error: " + error.error)
     throw error;
   } 
 
   private checkActivationAccountError(error: any): any {
     if(error.message.text == "Account is activated") {
-      Swal.fire({
-        // icon: 'error',
-        title: 'You can login',
-        text: error.message.text,
-      })
+      // Swal.fire({
+      //   // icon: 'error',
+      //   title: 'You can login',
+      //   text: error.message.text,
+      // })
+      alert("You can login, " + error.message.text)
       return;
     } 
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: error.message,
-    })
+    // Swal.fire({
+    //   icon: 'error',
+    //   title: 'Oops...',
+    //   text: error.message,
+    // })
+    alert("Oops... " + error.message)
     throw error;
   }
 
