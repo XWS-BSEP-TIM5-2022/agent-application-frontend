@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import Swal from 'sweetalert2';
 import { User } from '../../model/user'
 
 @Component({
@@ -92,31 +91,35 @@ export class SignUpComponent implements OnInit {
     let pattern = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[-+_!@#$%^&*.,?:;<>=`~\\]\x22\x27\(\)\{\}\|\/\[\\\\?]).{8,}$')
     if(!pattern.test(this.user.password) || this.user.password.includes(" ")){
       this.messageLogin = "Password must contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character."
-      Swal.fire(
-        'Password error',
-        "Password must contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character and must not contain white spaces",
-        'error'
-      )
+      // Swal.fire(
+      //   'Password error',
+      //   "Password must contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character and must not contain white spaces",
+      //   'error'
+      // )
+      alert("Password must contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character and must not contain white spaces")
       return;
     }
     if(this.user.password.toLowerCase().includes(this.user.username.toLowerCase())){
-      Swal.fire(
-        'Password error',
-        "Password must not contain username",
-        'error'
-      )
+      // Swal.fire(
+      //   'Password error',
+      //   "Password must not contain username",
+      //   'error'
+      // )
+      alert("Password must not contain username")
       return;
     }
 
     this.authService.signUp(this.user)
       .subscribe(ok => {
-        Swal.fire(
-          'Check your email inbox',
-          '',
-          'success'
-        ).finally( () => {
-          window.location.reload();
-        })   
+        // Swal.fire(
+        //   'Check your email inbox',
+        //   '',
+        //   'success'
+        // ).finally( () => {
+        //   window.location.reload();
+        // })   
+        alert("Check your email inbox")
+        window.location.reload();
       },
       err => { 
         console.log(err.error)
@@ -158,11 +161,12 @@ export class SignUpComponent implements OnInit {
         console.log(ok)
         this.router.navigate(['job-offers'])
       }, err => {
-        Swal.fire(
-          'Error',
-          err.error,
-          'error'
-        )
+        // Swal.fire(
+        //   'Error',
+        //   err.error,
+        //   'error'
+        // )
+        alert("Error: " + err.error)
       })
   }
 
