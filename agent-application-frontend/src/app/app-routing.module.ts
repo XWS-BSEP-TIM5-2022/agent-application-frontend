@@ -45,20 +45,28 @@ const routes: Routes = [
     component: AccountSettingsComponent,
     canActivate: [RoleGuardService], 
     data: { 
-      expectedRole: 'ROLE_USER' //['User', 'Admin']
+      expectedRole: ['ROLE_USER', 'ROLE_ADMIN']
     }
   }, 
   {
     path: 'test',
-    component: TestComponent, // TODO SD: guard
+    component: TestComponent, 
   },
   {
     path: 'companies',
     component: CompaniesComponent, // TODO SD
+    canActivate: [RoleGuardService], 
+    data: { 
+      expectedRole: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_COMPANY_OWNER'] 
+    }
   },
   {
     path: 'company/:id',
     component: CompanyProfileComponent, // TODO SD: guard
+    canActivate: [RoleGuardService], 
+    data: { 
+      expectedRole: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_COMPANY_OWNER'] 
+    }
   },
   
 

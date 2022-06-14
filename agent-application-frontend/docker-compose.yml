@@ -1,0 +1,10 @@
+version: '3.3'
+services:
+  angular-docker:
+    container_name: angular-docker-container
+    # command: bash -c "
+    #   npm install
+    #   && npm start"
+    build: .
+    ports:
+      - '3000:3000'
