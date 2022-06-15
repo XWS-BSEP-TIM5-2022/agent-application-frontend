@@ -16,6 +16,6 @@ export class PostService {
   private readonly postPath = environment.dislinkt_backend_api + 'api/post';
 
   addPost(post: DislinktPost): Observable<SuccessMessage>{   
-    return this.http.post<SuccessMessage>(`https://localhost:8080/api/post/agents`, post)    
+    return this.http.post<SuccessMessage>(`https://localhost:8080/api/post/jobOffer`, post)    
   }
 }
