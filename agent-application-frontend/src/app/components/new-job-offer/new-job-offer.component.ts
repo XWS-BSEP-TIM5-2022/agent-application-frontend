@@ -84,17 +84,14 @@ export class NewJobOfferComponent implements OnInit {
                       let post = new DislinktPost;
                       post.text = "Job Offer";
 
-                      post.jobOffer.id = this.jobOffer.id + ""
                       post.jobOffer.companyId = this.jobOffer.companyId + ""
                       post.jobOffer.dailyActivities = this.jobOffer.dailyActivities
                       post.jobOffer.jobDescription = this.jobOffer.jobDescription
                       post.jobOffer.preconditions = this.jobOffer.preconditions
-                      post.jobOffer.position.id = this.jobOffer.position.id + ""
                       post.jobOffer.position.name = this.jobOffer.position.name
                       post.jobOffer.position.pay = this.jobOffer.position.pay
 
                       post.apiToken = this.apiToken;                  
-                      post.company.id = this.company.id + ""
                       post.company.description =  this.company.description
                       post.company.isActive =  this.company.isActive
                       post.company.name =  this.company.name
