@@ -21,7 +21,7 @@ export class SignUpComponent implements OnInit {
   };
   username: string = ""
   password: string = ""
-  code: string = ""
+  codeForLogin: string = ""
   email: string = ""
   isPassless = false;
   isLogin = true;
@@ -40,6 +40,7 @@ export class SignUpComponent implements OnInit {
   errorMessage= '';
   codeMissing = false;
   codeValidator = false;
+  submitted6digit = false;
 
   form: FormGroup = new FormGroup({
     username: new FormControl(''),
@@ -91,6 +92,15 @@ export class SignUpComponent implements OnInit {
     return this.passwordlessForm.controls;
   }
 
+  checkCode(){ 
+    let pattern = new RegExp('^[0-9]{1,6}$')
+    if(!pattern.test(this.codeForLogin)){
+      return false
+    }
+
+    return true
+  }
+
   signUp() {
  
     this.submitted3 = true;
@@ -136,10 +146,17 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmit6Digit(){
+
+    this.submitted6digit = true;
+
+    if(!this.checkCode()){
+      return
+    }
+
     let body = {
       "email": this.username,
       "password": this.password,
-      "code" : this.code
+      "code" : this.codeForLogin
     }
     this.authService.login(body)
       .subscribe(ok => {
@@ -161,7 +178,8 @@ export class SignUpComponent implements OnInit {
         if(ok === false){
           let body = {
             "email": this.username,
-            "password": this.password
+            "password": this.password,
+            "code" : ""
           }
           this.authService.login(body)
             .subscribe(ok => {

@@ -34,27 +34,21 @@
 									<li data-tab="3" [ngClass]="{'current' : isSignup}"><a href="javascript:void(1);" title="" (click)="isPassless = false; isLogin = false; isSignup = true">Sign up</a></li>				
 								</ul>			
 								
-								<div *ngIf="isLogin"  class="sign_in_sec current" id="tab-1">	
-
-									<form *ngIf="showCodeRequest" name="digitForm" (ngSubmit)="digitForm.valid && onSubmit6Digit()" #f="ngForm" novalidate>
+								<div *ngIf="isLogin"  class="sign_in_sec current" id="tab-1">	 
+									<div *ngIf="showCodeRequest">
 										<div class="form-group">
 											<label for="code">Enter the 6-digit code from your authenticator app</label> 
-											<input type="text" class="form-control" name="code" [(ngModel)]="code" 
-											formControlName="code"
-											required minlength="6" maxlength="6" pattern="^[0-9]{1,6}$" #code="ngModel" />
+											<input type="text" class="form-control" name="code" id="code" [(ngModel)]="codeForLogin"  
+											required minlength="6" maxlength="6" pattern="^[0-9]{1,6}$"  />
 											<br><br>
-											<div class="alert alert-danger" role="alert" *ngIf="f.submitted && code.invalid">
-												Code must be 6 characters long
+											<div class="alert alert-danger" role="alert" *ngIf="submitted6digit && !checkCode()">
+												Code must be 6 characters long and contains only digits
 											</div>
 										</div>
 										<div class="form-group">
-											<button class="btn btn-primary btn-block">Login</button>
-										</div>
-										<!-- <div class="form-group">
-											<div class="alert alert-danger" role="alert" *ngIf="isLoginFailed">Login failed: {{ errorMessage }}</div>
-										</div> -->
-									</form> 
-
+											<button class="btn btn-primary btn-block" (click)="onSubmit6Digit()">Sign in</button>
+										</div>  
+									</div>
 									<h3 *ngIf="!showCodeRequest">Sign in</h3>
 									<form [formGroup]="form" *ngIf="!showCodeRequest">
 										<div class="row">

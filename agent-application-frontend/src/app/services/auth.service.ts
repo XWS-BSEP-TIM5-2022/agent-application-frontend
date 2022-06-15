@@ -74,7 +74,7 @@ export class AuthService {
     throw error;
   }
 
-  login(body: {email: string, password: string}) {
+  login(body: {email: string, password: string, code: string}) {
     const headers = new HttpHeaders({
        'Accept': 'application/json',
        'Content-Type': 'application/json'
