@@ -108,6 +108,14 @@ export class SignUpComponent implements OnInit {
       return;
     }
 
+    let usernamePattern = new RegExp('^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$')
+
+    if(!usernamePattern.test(this.user.username)){
+      
+      alert("Username can contain only letters, digits, dot(.), underscore(_) and hyphen(-) and can be 5-20 characters long")
+      return;
+    }
+
     let pattern = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[-+_!@#$%^&*.,?:;<>=`~\\]\x22\x27\(\)\{\}\|\/\[\\\\?]).{8,}$')
     if(!pattern.test(this.user.password) || this.user.password.includes(" ")){
       this.messageLogin = "Password must contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character."
