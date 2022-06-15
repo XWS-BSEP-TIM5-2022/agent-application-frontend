@@ -138,7 +138,8 @@ export class SignUpComponent implements OnInit {
   onSubmit6Digit(){
     let body = {
       "email": this.username,
-      "password": this.password
+      "password": this.password,
+      "code" : this.code
     }
     this.authService.login(body)
       .subscribe(ok => {
