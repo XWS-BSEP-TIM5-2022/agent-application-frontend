@@ -13,6 +13,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AuthService {
   private readonly signUpPath = environment.backend_api + 'auth/register';
   private readonly loginPath = environment.backend_api + 'auth/login';
+  private readonly check2FAPath = environment.backend_api + 'auth/checkIfEnabled2FA/';
   private readonly activateAccountPath = environment.backend_api + 'auth/activateAccount?token=';
   private readonly changePasswordPath = environment.backend_api + 'users/changePassword'
 
@@ -28,9 +29,20 @@ export class AuthService {
       'Content-Type': 'application/json'
    });
     return this.http.post(this.signUpPath, JSON.stringify(user), {'headers': headers})
-    .pipe(map((res: any) => { }))
+    .pipe(map((res: any) => { return res }))
     .pipe(catchError(error => this.checkError(error)));
     
+  }
+
+  check2FA(username){
+ 
+    const headers = new HttpHeaders({
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+     });
+    return this.http.get(this.check2FAPath + username, {'headers': headers})
+    .pipe(map((res: any) => { return res }))
+    .pipe(catchError(error => this.checkError(error))); 
   }
 
   private checkError(error: any): any {
@@ -62,7 +74,7 @@ export class AuthService {
     throw error;
   }
 
-  login(body: {email: string, password: string}) {
+  login(body: {email: string, password: string, code: string}) {
     const headers = new HttpHeaders({
        'Accept': 'application/json',
        'Content-Type': 'application/json'
