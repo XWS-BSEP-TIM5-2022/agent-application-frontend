@@ -17,9 +17,11 @@ export class SignUpComponent implements OnInit {
       "email": "",
       "username": "",
       "password" : "",
+      "using2FA" : false
   };
   username: string = ""
   password: string = ""
+  code: string = ""
   email: string = ""
   isPassless = false;
   isLogin = true;
@@ -31,7 +33,14 @@ export class SignUpComponent implements OnInit {
   submitted1 = false;
   submitted2 = false;
   submitted3 = false;
-  
+  finishedSignup = false;
+  qrCode :any  = "";
+  showCodeRequest = false;
+  digitForm: any = {};
+  errorMessage= '';
+  codeMissing = false;
+  codeValidator = false;
+
   form: FormGroup = new FormGroup({
     username: new FormControl(''),
     password: new FormControl(''),
@@ -83,6 +92,7 @@ export class SignUpComponent implements OnInit {
   }
 
   signUp() {
+ 
     this.submitted3 = true;
     if (this.sform.invalid) {
       return;
@@ -111,47 +121,21 @@ export class SignUpComponent implements OnInit {
 
     this.authService.signUp(this.user)
       .subscribe(ok => {
-        // Swal.fire(
-        //   'Check your email inbox',
-        //   '',
-        //   'success'
-        // ).finally( () => {
-        //   window.location.reload();
-        // })   
-        alert("Check your email inbox")
-        window.location.reload();
+ 
+        if(this.user.using2FA){ 
+
+          this.qrCode = ok.qrCode 
+
+        }
+        
+        this.finishedSignup = true;
       },
       err => { 
         console.log(err.error)
       })
   }
 
-
-  login(){ 
-    this.submitted1 = true;
-    if (this.form.invalid) {
-      return;
-    }
-
-    // let pattern = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[-+_!@#$%^&*.,?:;<>=`~\\]\x22\x27\(\)\{\}\|\/\[\\\\?]).{8,}$')
-    // if(!pattern.test(this.user.password) || this.user.password.includes(" ")){
-    //   this.messageLogin = "Password must contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character."
-    //   Swal.fire(
-    //     'Password error',
-    //     "Password must contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character and must not contain white spaces",
-    //     'error'
-    //   )
-    //   return;
-    // }
-    // if(this.user.password.toLowerCase().includes(this.user.username.toLowerCase())){
-    //   Swal.fire(
-    //     'Password error',
-    //     "Password must not contain username",
-    //     'error'
-    //   )
-    //   return;
-    // }
-
+  onSubmit6Digit(){
     let body = {
       "email": this.username,
       "password": this.password
@@ -160,14 +144,43 @@ export class SignUpComponent implements OnInit {
       .subscribe(ok => {
         console.log(ok)
         this.router.navigate(['job-offers'])
-      }, err => {
-        // Swal.fire(
-        //   'Error',
-        //   err.error,
-        //   'error'
-        // )
+      }, err => { 
         alert("Error: " + err.error)
       })
+  }
+
+  login(){ 
+    this.submitted1 = true;
+    if (this.form.invalid) {
+      return;
+    } 
+
+    this.authService.check2FA(this.username)
+    .subscribe(ok => { 
+        if(ok === false){
+          let body = {
+            "email": this.username,
+            "password": this.password
+          }
+          this.authService.login(body)
+            .subscribe(ok => {
+              console.log(ok)
+              this.router.navigate(['job-offers'])
+            }, err => { 
+              alert("Error: " + err.error)
+            })
+        }else if(ok === true){
+            this.showCodeRequest = true;
+        }else{
+          alert("Error")
+        }
+
+
+    }, err => { 
+      alert("Error: " + err.error)
+    })
+
+   
   }
 
   onEmailChange(){
@@ -180,4 +193,5 @@ export class SignUpComponent implements OnInit {
       return;
     }
   }
+ 
 }

@@ -35,8 +35,28 @@
 								</ul>			
 								
 								<div *ngIf="isLogin"  class="sign_in_sec current" id="tab-1">	
-									<h3>Sign in</h3>
-									<form [formGroup]="form">
+
+									<form *ngIf="showCodeRequest" name="digitForm" (ngSubmit)="digitForm.valid && onSubmit6Digit()" #f="ngForm" novalidate>
+										<div class="form-group">
+											<label for="code">Enter the 6-digit code from your authenticator app</label> 
+											<input type="text" class="form-control" name="code" [(ngModel)]="code" 
+											formControlName="code"
+											required minlength="6" maxlength="6" pattern="^[0-9]{1,6}$" #code="ngModel" />
+											<br><br>
+											<div class="alert alert-danger" role="alert" *ngIf="f.submitted && code.invalid">
+												Code must be 6 characters long
+											</div>
+										</div>
+										<div class="form-group">
+											<button class="btn btn-primary btn-block">Login</button>
+										</div>
+										<!-- <div class="form-group">
+											<div class="alert alert-danger" role="alert" *ngIf="isLoginFailed">Login failed: {{ errorMessage }}</div>
+										</div> -->
+									</form> 
+
+									<h3 *ngIf="!showCodeRequest">Sign in</h3>
+									<form [formGroup]="form" *ngIf="!showCodeRequest">
 										<div class="row">
 											<div class="col-lg-12 no-pdd">
 												<div class="form-group">
@@ -128,9 +148,20 @@
 								</div>
 								
 								<div *ngIf="isSignup" class="sign_in_sec current" id="tab-3">
-									<h3>Sign up</h3>
+									<h3 *ngIf="!finishedSignup">Sign up</h3>
 
-									<form [formGroup]="sform">
+									<div *ngIf="finishedSignup"> 
+										<p style="font-weight: bold; text-align: center;">Verification email sent to {{user.email}}</p><br><br>
+
+										<div *ngIf="qrCode !== '' && qrCode !== undefined " >
+											<p style="text-align:center; font-weight: bold;">
+												Your registration is successful! Scan this QR code using Google Authenticator app on your phone 
+												to use it later for login.</p>
+											<img class="col-md-12" src="{{qrCode}}" />  
+										</div>
+									</div>
+
+									<form [formGroup]="sform" *ngIf="!finishedSignup">
 										<div class="row">
 											<div class="col-lg-12 no-pdd">
 												<div class="sn-field" style="margin-top: 10px;">
@@ -203,73 +234,25 @@
 												<label style="color: red; font-size: 12px;">{{messageSignUp}}</label>
 											</div>
 											</div>
-										
-											<!-- Skills -->
-											<!-- <div class="col-lg-12 no-pdd">
-												<div style="justify-content: space-between; display: flex;">
-													<label>Skills:</label>
-													<button type="submit" style="margin-top: 0%;" (click)="addSkill()"><i class="la la-plus"></i></button>                                                  
+											<div class="col-lg-12 no-pdd">
+												<div class="checky-sec">
+													<div class="fgt-sec">
+														<input type="checkbox" name="cc" id="c1"
+														(change)="user.using2FA = !user.using2FA">
+														<label for="c1">
+															<span></span>
+														</label>
+														<small>Use two step verification</small>
+													</div><!--fgt-sec end--> 
 												</div>
 											</div>
-
-											<div class="col-lg-12 no-pdd" *ngFor="let divData of skills">
-												<br>
-												<div class="sn-field" style="justify-content: space-between; display: flex;">
-													<input type="text" name="password" placeholder="Skill" autocomplete="off">
-													<i class="la la-check-circle"></i>
-
-												</div>
-											</div> -->
-											<!-- Skills -->
-
-											<!-- Interests -->
-											<!-- <div class="col-lg-12 no-pdd">
-												<div style="justify-content: space-between; display: flex;">
-													<label>Interests:</label>
-													<button type="submit" style="margin-top: 0%;" (click)="addInterests()"><i class="la la-plus"></i></button>  
-											
-												</div>
-											</div>
-
-											<div class="col-lg-12 no-pdd" *ngFor="let divData of interests">
-												<br>
-												<div class="sn-field">
-													<input type="text" name="password" placeholder="Name" autocomplete="off">
-													<input type="text" name="password" placeholder="Description" autocomplete="off">
-
-												</div>
-											</div> -->
-											<!-- Interests -->
-
-
-											 <!-- Education -->
-											 <!-- <div class="col-lg-12 no-pdd">
-												<div style="justify-content: space-between; display: flex;">
-													<label>Education:</label>
-													<button type="submit" style="margin-top: 0%;" (click)="addEducation()"><i class="la la-plus"></i></button>                                                  
-												</div>
-											</div>
-
-											<div class="col-lg-12 no-pdd" *ngFor="let divData of education">
-												<br>
-												<div class="sn-field">
-													<input type="text" name="name" placeholder="Name" autocomplete="off">
-													<input type="text" name="password" placeholder="Headline" autocomplete="off">
-													<input type="text" name="password" placeholder="Place" autocomplete="off">
-													<input placeholder="Start date" class="textbox-n" type="text" onfocus="(this.type='date')" id="date">
-													<input placeholder="End date" class="textbox-n" type="text" onfocus="(this.type='date')" id="date">
-
-
-												</div>
-											</div> -->
-											<!-- Education -->
-
 											<div class="col-lg-12 no-pdd">
 												<button type="submit" value="submit" (click)="signUp()">Sign up</button>
 											</div>
 										</div>
 									</form>
 								</div>
+
 
 							</div><!--login-sec end-->
 						</div>
