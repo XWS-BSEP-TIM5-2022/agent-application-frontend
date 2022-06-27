@@ -1,55 +1,19 @@
-# FROM node:14.16.0
+FROM node:alpine3.11 as build
 
-# COPY package.json /front/
-# WORKDIR /front/
-# RUN npm install
-# ENV PATH /front/node_modules/.bin:$PATH
+LABEL maintainer="sanja.drinic@uns.ac.rs"
+ARG API_URL="https://localhost:8090/"
 
-# COPY . /data/app/
-# WORKDIR /data/app/
-
-# EXPOSE 8081
-
-# FROM node:14.17.1-alpine as build-step
-
-# RUN mkdir -p /app
-
-# WORKDIR /app
-
-# COPY package.json /app
-# RUN npm install --save
-# RUN npm prune 
-
-# RUN npm install -g @angular/cli@13.3.7
-
-# COPY . /app
-
-# EXPOSE 3000
-
-# CMD ng serve
-
-# FROM node:14.17.1-alpine
-# WORKDIR /node
-# COPY package.json package-lock.json ./
-
-# RUN npm install
-# WORKDIR /node/app
-# COPY . .
-# # CMD ["npm", "start"]
-
-FROM node:14.15.0-alpine as build
-COPY ./ ./app
-RUN cd app && \
-    npm install
-COPY ./src/environments/environment.ts ./app
-COPY ./conf/build-app.sh .
-ARG AGENT_API_URL
-RUN chmod +x ./build-app.sh && \
-    ./build-app.sh ${AGENT_API_URL}
+WORKDIR /usr/src/server
+COPY . .
+RUN npm install && \
+    sed -i -e "/backend_api:/c\\${API_URL}" \
+      ./src/environments/environment.ts && \
+    npm run build --prod  && \
+    cd dist && \
+    mv $(ls -d */|head -n 1) /app
 
 
-FROM node:14.15.0-alpine as executer
-COPY --from=build /app /usr/src/server
-EXPOSE 3000
-
-CMD ["node", "/usr/src/server/server.js"]
+FROM nginx:1.21-alpine as execute
+EXPOSE 4200
+COPY ./docker/nginx.conf /etc/nginx/nginx.conf
+COPY --from=build /app /usr/share/nginx/html/app

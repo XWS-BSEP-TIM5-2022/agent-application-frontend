@@ -50,8 +50,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "4mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -82,8 +82,8 @@
           "options": {
             "port": 3000,
             "ssl": true,
-            "sslKey": "ssl/agent-front.key",
-            "sslCert": "ssl/agent-front.crt"
+            "sslKey": "src/ssl/agent-front.key",
+            "sslCert": "src/ssl/agent-front.crt"
         
           },
           "builder": "@angular-devkit/build-angular:dev-server",
