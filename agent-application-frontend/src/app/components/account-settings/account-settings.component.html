@@ -13,7 +13,7 @@
                             <nav> 
                                 <ul>
                                     <li>
-                                        <a href="/job-offers" title="">
+                                        <a routerLink="/job-offers" title="">
                                             Home
                                         </a>
                                     </li>
@@ -24,7 +24,7 @@
                             <nav> 
                                 <ul>
                                     <li>
-                                        <a href="/requests">
+                                        <a routerLink="/requests">
                                             Request
                                         </a>
                                     </li>
@@ -35,7 +35,7 @@
                             <nav> 
                                 <ul>
                                     <li>
-                                        <a href="/companies" title="">
+                                        <a routerLink="/companies" title="">
                                             Companies
                                         </a>
                                     </li>
@@ -51,7 +51,7 @@
                             <div class="user-account-settingss active" *ngIf="visibleUserAcccountSettings">
                                 <h3>Settings</h3>
                                 <ul class="us-links">
-                                    <li><a href="/account-setting" title="">Account Setting</a></li>
+                                    <li><a routerLink="/account-setting" title="">Account Setting</a></li>
                                     <li><a title="">Privacy</a></li>
                                     <li><a title="">Faqs</a></li>
                                     <li><a title="">Terms & Conditions</a></li>
@@ -71,15 +71,15 @@
 						<div class="col-lg-3">
 							<div class="acc-leftbar">
 								<div class="nav nav-tabs" id="nav-tab" role="tablist">
-								    <a class="nav-item nav-link" id="nav-acc-tab" data-toggle="tab" href="#nav-acc" role="tab" aria-controls="nav-acc" aria-selected="true"><i class="la la-cogs"></i>Account Setting</a>
-								    <a class="nav-item nav-link" id="nav-status-tab" data-toggle="tab" href="#nav-status" role="tab" aria-controls="nav-status" aria-selected="false"><i class="fa fa-line-chart"></i>Status</a>
+								    <a class="nav-item nav-link" id="nav-acc-tab" data-toggle="tab" routerLink="#nav-acc" role="tab" aria-controls="nav-acc" aria-selected="true"><i class="la la-cogs"></i>Account Setting</a>
+								    <a class="nav-item nav-link" id="nav-status-tab" data-toggle="tab" routerLink="#nav-status" role="tab" aria-controls="nav-status" aria-selected="false"><i class="fa fa-line-chart"></i>Status</a>
 								    <a class="nav-item nav-link" style="cursor: pointer;" [ngClass]="{'active': this.changePassTab === true}" id="nav-password-tab" data-toggle="tab" (click)="changePass()" role="tab" aria-controls="nav-password" aria-selected="false"><i class="fa fa-lock"></i>Change Password</a>
-								    <a class="nav-item nav-link" id="nav-notification-tab" data-toggle="tab" href="#nav-notification" role="tab" aria-controls="nav-notification" aria-selected="false"><i class="fa fa-flash"></i>Notifications</a>
+								    <a class="nav-item nav-link" id="nav-notification-tab" data-toggle="tab" routerLink="#nav-notification" role="tab" aria-controls="nav-notification" aria-selected="false"><i class="fa fa-flash"></i>Notifications</a>
 								    <a class="nav-item nav-link" style="cursor: pointer;" [ngClass]="{'active': this.requestTab === true}" id="nav-requests-tab" data-toggle="tab" (click)="requests()" role="tab" aria-controls="nav-requests" aria-selected="false"><i class="fa fa-group"></i>Requests</a>
-								    <a class="nav-item nav-link" id="security-login" data-toggle="tab" href="#security-login" role="tab" aria-controls="security-login" aria-selected="false"><i class="fa fa-user-secret"></i>Security and Login</a>
-								    <a class="nav-item nav-link" id="privacy" data-toggle="tab" href="#privacy" role="tab" aria-controls="privacy" aria-selected="false"><i class="fa fa-paw"></i>Privacy</a>
-								    <a class="nav-item nav-link" id="blockking" data-toggle="tab" href="#blockking" role="tab" aria-controls="blockking" aria-selected="false"><i class="fa fa-cc-diners-club"></i>Blocking</a>
-								    <a class="nav-item nav-link" id="nav-deactivate-tab" data-toggle="tab" href="#nav-deactivate" role="tab" aria-controls="nav-deactivate" aria-selected="false"><i class="fa fa-random"></i>Deactivate Account</a>
+								    <a class="nav-item nav-link" id="security-login" data-toggle="tab" routerLink="#security-login" role="tab" aria-controls="security-login" aria-selected="false"><i class="fa fa-user-secret"></i>Security and Login</a>
+								    <a class="nav-item nav-link" id="privacy" data-toggle="tab" routerLink="#privacy" role="tab" aria-controls="privacy" aria-selected="false"><i class="fa fa-paw"></i>Privacy</a>
+								    <a class="nav-item nav-link" id="blockking" data-toggle="tab" routerLink="#blockking" role="tab" aria-controls="blockking" aria-selected="false"><i class="fa fa-cc-diners-club"></i>Blocking</a>
+								    <a class="nav-item nav-link" id="nav-deactivate-tab" data-toggle="tab" routerLink="#nav-deactivate" role="tab" aria-controls="nav-deactivate" aria-selected="false"><i class="fa fa-random"></i>Deactivate Account</a>
 								  </div>
 							</div><!--acc-leftbar end-->
 						</div>
@@ -93,7 +93,7 @@
 												<h4>Notification Sound</h4>
 												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pretium nulla quis erat dapibus, varius hendrerit neque suscipit. Integer in ex euismod, posuere lectus id</p>
 												<div class="toggle-btn">
-													<a href="#" title=""><img src="images/up-btn.png" alt=""></a>
+													<a routerLink="#" title=""><img src="images/up-btn.png" alt=""></a>
 												</div>
 											</div><!--notbar end-->
 											<div class="notbar">
@@ -107,7 +107,7 @@
 												<h4>Chat Message Sound</h4>
 												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pretium nulla quis erat dapibus, varius hendrerit neque suscipit. Integer in ex euismod, posuere lectus id</p>
 												<div class="toggle-btn">
-													<a href="#" title=""><img src="images/up-btn.png" alt=""></a>
+													<a routerLink="#" title=""><img src="images/up-btn.png" alt=""></a>
 												</div>
 											</div><!--notbar end-->
 											<div class="save-stngs">

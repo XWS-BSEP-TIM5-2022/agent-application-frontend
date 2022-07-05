@@ -14,6 +14,6 @@ RUN npm install && \
 
 
 FROM nginx:1.21-alpine as execute
-EXPOSE 4200
+EXPOSE 3000
 COPY ./docker/nginx.conf /etc/nginx/nginx.conf
 COPY --from=build /app /usr/share/nginx/html/app

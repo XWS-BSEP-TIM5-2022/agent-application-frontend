@@ -29,9 +29,9 @@
 						<div class="col-lg-6">
 							<div class="login-sec">
 								<ul class="sign-control">
-									<li data-tab="tab-1" [ngClass]="{'current' : isLogin}"><a href="" title="" (click)="isPassless = false; isLogin = true; isSignup = false">Sign in</a></li>		
-									<li data-tab="2" [ngClass]="{'current' : isPassless}"><a href="javascript:void(0);" title="" (click)="isPassless = true; isLogin = false; isSignup = false">Sign in with email</a></li>		
-									<li data-tab="3" [ngClass]="{'current' : isSignup}"><a href="javascript:void(1);" title="" (click)="isPassless = false; isLogin = false; isSignup = true">Sign up</a></li>				
+									<li data-tab="tab-1" [ngClass]="{'current' : isLogin}"><a routerLink="" title="" (click)="isPassless = false; isLogin = true; isSignup = false">Sign in</a></li>		
+									<li data-tab="2" [ngClass]="{'current' : isPassless}"><a routerLink="javascript:void(0);" title="" (click)="isPassless = true; isLogin = false; isSignup = false">Sign in with email</a></li>		
+									<li data-tab="3" [ngClass]="{'current' : isSignup}"><a routerLink="javascript:void(1);" title="" (click)="isPassless = false; isLogin = false; isSignup = true">Sign up</a></li>				
 								</ul>			
 								
 								<div *ngIf="isLogin"  class="sign_in_sec current" id="tab-1">	 
@@ -96,7 +96,7 @@
 														</label>
 														<small>Remember me</small>
 													</div>fgt-sec end -->
-													<a href="/account-recovery" title="">Forgot Password?</a>
+													<a routerLink="/account-recovery" title="">Forgot Password?</a>
 												</div>
 											</div>
 											<div class="col-lg-12 no-pdd">
