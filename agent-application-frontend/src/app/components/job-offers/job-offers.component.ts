@@ -80,7 +80,7 @@ export class JobOffersComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      window.location.reload();
+      this.loadJobOffers();
     });
   }
 
@@ -92,7 +92,7 @@ export class JobOffersComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      window.location.reload();
+      this.loadJobOffers();
     });
   }
 
@@ -123,7 +123,7 @@ export class JobOffersComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      window.location.reload();
+      this.loadJobOffers();
     });
   }
 }

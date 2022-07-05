@@ -100,7 +100,8 @@ export class CompaniesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      window.location.reload();
+      this.loadJobOffers();
+      this.loadCompanies();
     });
   }
 
@@ -111,7 +112,8 @@ export class CompaniesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      window.location.reload();
+      this.loadJobOffers();
+      this.loadCompanies();
     });
   }
 

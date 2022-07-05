@@ -79,11 +79,11 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "options": {
-            "port": 3000,
+          "options": { 
+            "port": 3000,  
             "ssl": true,
-            "sslKey": "src/ssl/agent-front.key",
-            "sslCert": "src/ssl/agent-front.crt"
+            "sslKey": "ssl/agent-front.key",
+            "sslCert": "ssl/agent-front.crt"
         
           },
           "builder": "@angular-devkit/build-angular:dev-server",

@@ -54,7 +54,7 @@ const routes: Routes = [
   },
   {
     path: 'companies',
-    component: CompaniesComponent, // TODO SD
+    component: CompaniesComponent,
     canActivate: [RoleGuardService], 
     data: { 
       expectedRole: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_COMPANY_OWNER'] 
@@ -62,7 +62,7 @@ const routes: Routes = [
   },
   {
     path: 'company/:id',
-    component: CompanyProfileComponent, // TODO SD: guard
+    component: CompanyProfileComponent,
     canActivate: [RoleGuardService], 
     data: { 
       expectedRole: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_COMPANY_OWNER'] 
